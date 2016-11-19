@@ -1,0 +1,108 @@
+    .time label{
+        display:inline-block;
+        color:#747474;
+        margin:10px 10px 10px 5px;
+        font-size:16px;
+        text-align:center;
+    }
+    .time span{
+        cursor:pointer;
+        display:inline-block;
+        color:#747474;
+        margin:20px 20px 20px 5px;
+        font-size:14px;
+        width:70px;
+        height:40px;
+        background:#FFFFFF;
+        border:1px solid #e5e5e5;
+        border-radius:3px;
+        text-align:center;
+        line-height:20px;
+    }
+    .time span:hover{
+        color:#FC7D01;
+        border:1px solid #FC7D01;
+        background:#fffefb;
+    }
+    .time .select{
+        color:#FC7D01;
+        border:1px solid #FC7D01;
+        background:#fffefb;
+    }
+    .time input{ 
+        display:none;
+        height:0;
+        width:0;
+    }
+    .cinema label{
+        display:inline-block;
+        color:#747474;
+        margin:10px 10px 10px 5px;
+        font-size:16px;
+        text-align:center;
+    }
+    .cinema span{
+        cursor:pointer;
+        display:inline-block;
+        color:#747474;
+        margin:10px 10px 10px 0;
+        font-size:16px;
+        width:90px;
+        height:40px;
+        background:#FFFFFF;
+        border:1px solid #e5e5e5;
+        border-radius:3px;
+        text-align:center;
+        line-height:20px;
+    }
+    .cinema span:hover{
+        color:#FC7D01;
+        border:1px solid #FC7D01;
+        background:#fffefb;
+    }
+    .cinema .select{
+        color:#FC7D01;
+        border:1px solid #FC7D01;
+        background:#fffefb;
+    }
+    .cinema input{ 
+        display:none;
+        height:0;
+        width:0;
+    }
+    .movie label{
+        display:inline-block;
+        color:#747474;
+        margin:10px 10px 10px 5px;
+        font-size:16px;
+        text-align:center;
+    }
+    .movie span{
+        cursor:pointer;
+        display:inline-block;
+        color:#747474;
+        margin:10px 10px 10px 0;
+        font-size:17px;
+        width:90px;
+        height:20px;
+        background:#FFFFFF;
+        border:1px solid #e5e5e5;
+        border-radius:3px;
+        text-align:center;
+        line-height:20px;
+    }
+    .movie span:hover{
+        color:#FC7D01;
+        border:1px solid #FC7D01;
+        background:#fffefb;
+    }
+    .movie .select{
+        color:#FC7D01;
+        border:1px solid #FC7D01;
+        background:#fffefb;
+    }
+    .movie input{ 
+        display:none;
+        height:0;
+        width:0;
+    }

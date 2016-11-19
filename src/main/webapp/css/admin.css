@@ -1,0 +1,45 @@
+body{
+	
+}
+.main{
+	left:25%;
+	right:25%;
+	width:50%;
+	top:10%;
+	position:absolute;
+	background:#ffffff;
+}
+.search{
+	height:35px;
+	left:5%;
+	position:relative;
+}
+.tablearea{
+	top:15px;
+	position:relative;
+	font-family: 'ambleregular';
+}
+select{
+	width:20%;
+	height:30px;
+	top:5px;
+	text-align:center;
+}
+input[type="text"]{
+	width:50%;
+	height:30px;
+	top:5px;
+	font-family: 'ambleregular';
+}
+input[type="submit"]{
+	width: 20%;
+	height:30px;
+	top:5px;
+	background: #e0e0e0;
+	font-family: 'ambleregular';
+	color: #555555;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	transition: 0.5s;
+}

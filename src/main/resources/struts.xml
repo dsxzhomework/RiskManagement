@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+
+	<package name="struts2"  namespace="/" extends="struts-default">
+
+		<action name="login" class="riskManager.action.LoginAction">
+			<result name="success" type="redirect">home.jsp</result>
+			<result name="admin" type="redirect">admin.jsp</result>
+			<result name="fail" type="redirect">login.jsp?error=1</result>
+		</action>
+		
+		<action name="loginout" class="riskManager.action.LoginoutAction">
+			<result name="success" type="redirect">login.jsp</result>
+		</action>
+		
+		
+		<action name="showproject" class="riskManager.action.ProjectAction" method="show">
+			<result name="success" type="redirect">showproject.jsp</result>
+		</action>
+		
+		<action name="addproject" class="riskManager.action.ProjectAction" method="add">
+			<result name="success" type="redirect">/RiskManagement/showproject</result>
+		</action>
+		
+		<action name="admin" class="riskManager.action.AdminAction">
+		    <result name="success" type="redirect">admin.jsp</result>
+		    <result name="fail" type="redirect">admin.jsp?error=1</result>
+		    <result name="failnone" type="redirect">admin.jsp?error=2</result>
+		</action>
+		
+		<action name="register" class="riskManager.action.RegisterAction">
+		    <result name="success" type="redirect">login.jsp</result>
+		    <result name="incomplete" type="redirect">register.jsp?error=1</result>
+		    <result name="incompatible" type="redirect">register.jsp?error=2</result>
+		</action>
+		
+		<action name="addRisk" class="riskManager.action.RiskAction" method="add">
+			<result name="success" type="redirect">/RiskManagement/showRisk</result>
+			<result name="fail" type="redirect">addrisk.jsp?error=1</result>
+		</action>
+		
+		<action name="showRisk" class="riskManager.action.RiskAction" method="show">
+			<result name="success" type="redirect">showrisk.jsp</result>
+		</action>
+		
+		<action name="deleteRisk" class="riskManager.action.RiskAction" method="delete">
+			<result name="success" type="redirect">showproject.jsp</result>
+			<result name="fail" type="redirect">showproject.jsp?error=1</result>
+		</action>
+		
+		<action name="updateRisk" class="riskManager.action.RiskAction" method="update">
+			<result name="success" type="redirect">/RiskManagement/showRisk</result>
+		</action>
+		
+		<action name="changeState" class="riskManager.action.RiskAction" method="change">
+			<result name="success" type="redirect">showrisk.jsp</result>
+			<result name="fail" type="redirect">show.jsp?error=1</result>
+		</action>
+
+		<action name="project" class="riskManager.action.ProjectAction">
+			<result name="success" type="redirect">home.jsp</result>
+		</action>
+
+	</package>
+
+</struts>
+

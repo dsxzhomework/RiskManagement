@@ -1,0 +1,102 @@
+body{
+    
+   
+}
+a{
+    text-decoration:none;
+    color: grey;
+}
+#login{
+    height: 650px;
+    background-image: url(../image/background/login.jpg);
+    background-size: 100% 100%;
+}
+#register{
+    height: 650px;
+    background-image: url(../image/background/register.jpg);
+    background-size: 100% 100%;
+}
+.input{
+    border-style: none;
+    outline-style: none;
+    background-color: transparent;
+    width: 22%;
+    height: 30px;
+    position: relative;
+    top:237px;
+    left:42%;
+    margin-top: 33px;
+    font-size:120%;
+}
+
+.rinput{
+    border-style: none;
+    outline-style: none;
+    background-color: transparent;
+    width: 23%;
+    height: 30px;
+    position: relative;
+    top:211px;
+    left:46.7%;
+    margin-top: 10.5px;
+    font-size:120%;
+}
+.sub{
+    border-style: none;
+    outline-style:groove;
+    outline-color:burlywood;
+    background-color: transparent;
+    
+}
+
+#confirmsub{
+    float: left;
+    position: relative;
+    top:230px;
+    left:31.2%;
+    width: 7.5%;
+    height: 30px;   
+    margin-right: 9%;
+}
+
+#registersub{
+    float: left;
+    position: relative;
+    top:230px;
+    left:31.2%;
+    width: 7.5%;
+    height: 30px;   
+    font-size:175%;
+}
+
+#loginInfo{
+    height: 30px;
+    position: relative;
+    top:230px;
+    left:30%;
+    font-size: 150%;
+    font-weight: 600;
+    color: red;
+}
+
+#logintip{
+    height: 30px;
+    position: relative;
+    top:220px;
+    left:29%;
+    font-size: 130%;
+    font-weight: 600;
+}
+
+#rp{
+   border-style: none;
+    outline-style:none;
+    outline-color:transparent;
+    background-color: transparent;
+    position: relative;
+    top:80px;
+    left:83%;
+    width: 7.5%;
+    height: 150px;   
+    font-size:175%;
+}
