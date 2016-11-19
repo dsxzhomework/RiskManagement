@@ -47,7 +47,7 @@ public class RegisterAction extends BaseAction{
 		
 		ServletContext sc=request.getServletContext();
 		
-		if(userrole.equals(null)||username.equals(null)||userpw.equals(null)||userpwconfirm.equals(null)){
+		if(userrole==null||username==null||userpw==null||userpwconfirm==null){
 			success="incomplete";
 			return success;
 		}
