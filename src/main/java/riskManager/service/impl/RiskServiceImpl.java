@@ -65,4 +65,34 @@ public class RiskServiceImpl implements RiskService {
 		return riskDao.statisticFault(start, end);
 	}
 
+	@Override
+	public List<Risk> findByType(int pid, int type) {
+		// TODO Auto-generated method stub
+		return riskDao.findByType(pid, type);
+	}
+
+	@Override
+	public List<Risk> findByState(int pid, int state) {
+		// TODO Auto-generated method stub
+		return riskDao.findByState(pid, state);
+	}
+
+	@Override
+	public List<Risk> findByTime(int pid, Date searchstarttime) {
+		// TODO Auto-generated method stub
+		return riskDao.findByTime(pid, searchstarttime);
+	}
+
+	@Override
+	public List<Risk> findByPRid(int pid, int rid) {
+		// TODO Auto-generated method stub
+		return riskDao.findByPRid(pid, rid);
+	}
+
+	@Override
+	public List<Risk> findByTracker(int pid, int tracker) {
+		// TODO Auto-generated method stub
+		return riskDao.findByTracker(pid, tracker);
+	}
+
 }

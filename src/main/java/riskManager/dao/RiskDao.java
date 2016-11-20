@@ -12,6 +12,16 @@ public interface RiskDao {
 	
 	Risk findByRid(int rid);
 	
+	List<Risk> findByType(int pid,int type);
+	
+	List<Risk> findByState(int pid,int state);
+	
+	List<Risk> findByTime(int pid,Date searchstarttime);
+	
+	List<Risk> findByPRid(int pid,int rid);
+	
+	List<Risk> findByTracker(int pid,int tracker);
+	
 	Risk update(Risk risk);
 	
 	void delete(Risk risk);

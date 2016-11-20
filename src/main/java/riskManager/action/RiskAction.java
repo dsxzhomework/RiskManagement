@@ -1,6 +1,8 @@
 package riskManager.action;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.servlet.ServletContext;
@@ -176,6 +178,81 @@ public class RiskAction extends BaseAction{
 			risk.setTracker(provider);
 			riskService.save(risk);
 		}
+		return success;
+	}
+	
+	public String findinproject(){
+		ServletContext sc=request.getServletContext();
+		pid=(int)sc.getAttribute("pid");
+		SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
+		
+		List<Risk> searchresult=new ArrayList();
+		
+		String condition=request.getParameter("searchinplan");
+		String search=request.getParameter("searchinplaninput");
+		
+		//搜索条件类型为空
+		if(condition==null){
+			searchresult=riskService.findByPid(pid);
+		}
+		//搜索条件类型不为空且不为全部，但搜索具体条件为空
+		if(condition!=null&&(!condition.equals("all"))&&search==null){
+			success="incomplete condition";
+			return success;
+		}
+		//按风险类型
+		if(condition.equals("searchptype")){
+			searchresult=riskService.findByType(pid, Integer.parseInt(search));
+		}
+		//按建立时间
+		if(condition.equals("searchpstarttime")){
+			try {
+				searchresult=riskService.findByTime(pid, f.parse(search));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		//按id
+		if(condition.equals("searchprid")){
+			searchresult=riskService.findByPRid(pid, Integer.parseInt(search));
+		}
+		//按跟踪者
+		if(condition.equals("searchptracker")){
+			searchresult=riskService.findByTracker(pid, Integer.parseInt(search));
+		}
+		//按状态
+		if(condition.equals("searchpstate")){
+			int searchstate=0;
+			if(search.equals("未触发")){
+				searchstate=0;
+			}else{
+				if(search.equals("已发生")){
+					searchstate=1;
+				}else{
+					if(search.equals("已解决")){
+						searchstate=2;
+					}else{
+						success="uncompatible input";
+						return success;
+					}
+				}
+			}
+			searchresult=riskService.findByState(pid,searchstate);
+		}
+		//项目风险管理计划全部风险
+		if(condition.equals("all")){
+			searchresult=riskService.findByPid(pid);
+		}
+		
+		//所得结果为空
+		if(searchresult.size()==0){
+			success="inexistence";
+			return success;
+		}
+		
+		sc.setAttribute("searchinplanresult", searchresult);
+		
 		return success;
 	}
 }

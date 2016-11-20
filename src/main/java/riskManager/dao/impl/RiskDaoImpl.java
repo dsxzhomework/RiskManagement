@@ -96,6 +96,51 @@ public class RiskDaoImpl extends YeekuHibernateDaoSupport implements RiskDao{
 		return null;
 	}
 
+	@Override
+	public List<Risk> findByType(int pid, int type) {
+		// TODO Auto-generated method stub
+		String sql="from riskManager.model.Risk where pid='"+pid+"' and type='"+type+"'";
+		Session session=baseDao.getNewSession();
+		List<Risk> result=session.createQuery(sql).list();
+		return result;
+	}
+
+	@Override
+	public List<Risk> findByState(int pid, int state) {
+		// TODO Auto-generated method stub
+		String sql="from riskManager.model.Risk where pid='"+pid+"' and state='"+state+"'";
+		Session session=baseDao.getNewSession();
+		List<Risk> result=session.createQuery(sql).list();
+		return result;
+	}
+
+	@Override
+	public List<Risk> findByTime(int pid, Date searchstarttime) {
+		// TODO Auto-generated method stub
+		String sql="from riskManager.model.Risk where pid='"+pid+"' and buildtime>'"+searchstarttime+"'";
+		Session session=baseDao.getNewSession();
+		List<Risk> result=session.createQuery(sql).list();
+		return result;
+	}
+
+	@Override
+	public List<Risk> findByPRid(int pid, int rid) {
+		// TODO Auto-generated method stub
+		String sql="from riskManager.model.Risk where pid='"+pid+"' and rid='"+rid+"'";
+		Session session=baseDao.getNewSession();
+		List<Risk> result=session.createQuery(sql).list();
+		return result;
+	}
+
+	@Override
+	public List<Risk> findByTracker(int pid, int tracker) {
+		// TODO Auto-generated method stub
+		String sql="from riskManager.model.Risk where pid='"+pid+"' and tracker='"+tracker+"'";
+		Session session=baseDao.getNewSession();
+		List<Risk> result=session.createQuery(sql).list();
+		return result;
+	}
+
 	
 	
 }
