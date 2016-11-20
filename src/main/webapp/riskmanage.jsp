@@ -81,8 +81,33 @@
 	<div id="button">
 		<a href="/RiskManagement/addrisk.jsp" style="color: #000">添加风险</a>
 	</div>
-	<div id="button" style="margin-left:200px;margin-top:-38px;">
+	<div id="button" style="margin-left:200px;margin-top:-38px;float:left;">
 		<a href="/RiskManagement/riskimport.jsp" style="color: #000;">导入风险</a>
+	</div>
+	<div id="search" style="margin-left:400px;margin-top:-30px;float:left;">
+	<form action="searchrisk">
+		类型：<select name="searchtype">
+		<%          
+		//0：人员变动；1：缺乏共识；2：资金不足；3：设备故障；4：设计欠缺；5：计划过于乐观；6：其他
+ 		%>
+ 			<option value="-1">--</option>
+			<option value="0">人员变动</option>
+			<option value="1">缺乏共识</option>
+			<option value="2">资金不足</option>
+			<option value="3">设备故障</option>
+			<option value="4">设计欠缺</option>
+			<option value="5">计划过于乐观</option>
+			<option value="6">其他</option>
+		</select>
+		状态：<select name="searchstate">
+			<option value="-1">--</option>
+			<option value="0">未发生</option>
+			<option value="1">已发生</option>
+			<option value="2">已解决</option>
+
+		</select>
+		<input type="submit" value="确定"> 
+	</form>
 	</div>
 	<br>
 	<div class="component" style="margin-top:-40px;">

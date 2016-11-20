@@ -16,6 +16,7 @@
 			<div class="nav_list">
 				<ul>
 					<li><a href="home.jsp">主页</a></li>
+					<li><a href="riskmanage.jsp">风险管理计划</a></li>	
 				</ul>
 			</div>
 			<div class="account_desc">

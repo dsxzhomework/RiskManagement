@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" import="java.util.*,riskManager.model.Statistic" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,7 +13,7 @@
 		width:100%;
 		height:20%;
 		margin-top:40px;
-		margin-left:140px;
+		margin-left:100px;
 	}
 	#diagram {
 		width:100%;
@@ -43,6 +43,7 @@
 						    String uname = (String)request.getServletContext().getAttribute("uname");
 						%>
 							<li><a href="home.jsp" target="_blank"><%=uname %></a></li>
+
 							<li><a href="/RiskManagement/loginout" target="_blank">登出</a></li>
 						</ul>
 					</div>
@@ -55,15 +56,21 @@
 		<script type="text/javascript" src="js/date.js"></script>
         <div style="float:left;">
              <span style="float:left;">开始日期：</span>        
-             <input name="datebegin" type="text" value="" onClick="showcalendar(event,this);" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''">
+             <input name="searchtimestart" type="text" value="" onClick="showcalendar(event,this);" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''">
 			 
 		</div>
         <div style="float:left;margin-left:40px;">
              <span style="float:left;">结束日期：</span>        
-             <input name="dateend" type="text" value="" onClick="showcalendar(event,this);" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''">
+             <input name="searchtimeend" type="text" value="" onClick="showcalendar(event,this);" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''">
 			 
 		</div>
-		<div class="submit" style="float:left;margin-left:40px;">
+		<div style="float:left;margin-left:40px;">
+		类型：<select name="statictype">
+			<option value="questionmost">问题最多</option>
+			<option value="identifymost">识别最多</option>
+		</select>
+		</div>
+		<div class="submit" style="float:left;margin-left:20px;">
 			<input type="submit" value="确认" onClick="choose()">
 		</div>
 	</form>
@@ -77,8 +84,25 @@
      
         //window.addEventListener("load", function(){    
      	//get data here
-          var data = [1000,1300,2000,1200,2000,3000];    
-          var xinforma = ['人员变动','缺乏共识','资金不足','设备故障','设计欠缺','计划过于乐观'];    
+     	<%
+     		List<Statistic> data = (List<Statistic>)request.getServletContext().getAttribute("statisticresult");
+     		int[] ydata = new int[7];
+     		String[] xdata = new String[7];
+     		for (int i=0;i < data.size();i++) {
+     			ydata[i] = data.get(i).getCountresult();
+     			switch(data.get(i).getType()){
+     			case 0:xdata[i]="人员变动";
+     			case 1:xdata[i]="缺乏共识";
+     			case 2:xdata[i]="资金不足";
+     			case 3:xdata[i]="设备故障";
+     			case 4:xdata[i]="设计欠缺";
+     			case 5:xdata[i]="计划过于乐观";
+     			case 6:xdata[i]="其他";
+     			}
+     		}
+     	%>
+          var data = ydata;    
+          var xinforma = xdata;    
           //0：人员变动；1：缺乏共识；2：资金不足；3：设备故障；4：设计欠缺；5：计划过于乐观；6：其他
 
           // 获取上下文    
@@ -162,7 +186,7 @@
              context.fillText(data[i], p.x + 1, p.y - 15);    
              context.fillText(xinforma[i],p.x + 1,realheight+12);    
              context.fillText('风险类型',realwidth,realheight+12);    
-             context.fillText('资金量',0,10);    
+             context.fillText('数量',0,10);    
              }    
         //},false);    
       };    
