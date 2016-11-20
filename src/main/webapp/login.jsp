@@ -27,7 +27,7 @@
         </div>
 		<div class="login-form">
 			<h1><b>登录</b></h1>
-			<form action="/RiskManagement/login" method="post">
+			<form action="login" method="post">
 				<%
 				if(request.getParameter("error") != null && request.getParameter("error").equals("1")){
 				%>
