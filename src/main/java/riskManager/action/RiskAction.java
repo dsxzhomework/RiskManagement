@@ -227,140 +227,44 @@ public class RiskAction extends BaseAction{
 			}
 		}
 		
-		/**
-		 * //搜索条件类型为空
-		if(condition==null){
-			searchresult=riskService.findByPid(pid);
-		}
-		if(condition.equals("searchptype0")){
-			search=0;
-			searchresult=riskService.findByType(pid, search);
-		}
-		if(condition.equals("searchptype1")){
-			search=1;
-			searchresult=riskService.findByType(pid, search);
-		}
-		if(condition.equals("searchptype2")){
-			search=2;
-			searchresult=riskService.findByType(pid, search);
-		}
-		if(condition.equals("searchptype3")){
-			search=3;
-			searchresult=riskService.findByType(pid, search);
-		}
-		if(condition.equals("searchptype4")){
-			search=4;
-			searchresult=riskService.findByType(pid, search);
-		}
-		if(condition.equals("searchptype5")){
-			search=5;
-			searchresult=riskService.findByType(pid, search);
-		}
-		if(condition.equals("searchptype6")){
-			search=6;
-			searchresult=riskService.findByType(pid, search);
-		}
-		if(condition.equals("searchpstate1")){
-			search=1;
-			searchresult=riskService.findByState(pid, search);
-		}
-		if(condition.equals("searchpstate2")){
-			search=1;
-			
-		}
-		 */
-		/**
-		 * String search=request.getParameter("searchinplaninput");
-		
-		
-		//搜索条件类型不为空且不为全部，但搜索具体条件为空
-		if(condition!=null&&(!condition.equals("all"))&&search==null){
-			success="incomplete condition";
-			return success;
-		}
-		//按风险类型
-		if(condition.equals("searchptype")){
-			searchresult=riskService.findByType(pid, Integer.parseInt(search));
-		}
-		//按建立时间
-		if(condition.equals("searchpstarttime")){
-			try {
-				searchresult=riskService.findByTime(pid, f.parse(search));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		//按id
-		if(condition.equals("searchprid")){
-			searchresult=riskService.findByPRid(pid, Integer.parseInt(search));
-		}
-		//按跟踪者
-		if(condition.equals("searchptracker")){
-			int searchtype=0;
-			if(search.equals("人员变动")){
-				searchtype=0;
-			}else{
-				if(search.equals("缺乏共识")){
-					searchtype=1;
-				}else{
-					if(search.equals("资金不足")){
-						searchtype=2;
-					}else{
-						if(search.equals("设备故障")){
-							searchtype=3;
-						}else{
-							if(search.equals("设计欠缺")){
-								searchtype=4;
-							}else{
-								if(search.equals("计划过于乐观")){
-									searchtype=5;
-								}else{
-									if(search.equals("")){
-										searchtype=6;
-									}else{
-										success="uncompatible input";
-										return success;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-			searchresult=riskService.findByTracker(pid, Integer.parseInt(search));
-		}
-		//按状态
-		if(condition.equals("searchpstate")){
-			int searchstate=0;
-			if(search.equals("未触发")){
-				searchstate=0;
-			}else{
-				if(search.equals("已发生")){
-					searchstate=1;
-				}else{
-					if(search.equals("已解决")){
-						searchstate=2;
-					}else{
-						success="uncompatible input";
-						return success;
-					}
-				}
-			}
-			searchresult=riskService.findByState(pid,searchstate);
-		}
-		//项目风险管理计划全部风险
-		if(condition.equals("searchall")){
-			searchresult=riskService.findByPid(pid);
-		 */
-		
-		//所得结果为空
+		/*
+		 * //所得结果为空
 		if(searchresult.size()==0){
 			success="empty";
 			return success;
 		}
+		 */
 		
-		sc.setAttribute("searchinplanresult", searchresult);
+		int size=searchresult.size();
+		String[] rids=new String[size];
+		String[] rnames=new String[size];
+		String[] affects=new String[size];
+		String[] states=new String[size];
+		
+		for(int i=0;i<size;i++){
+			Risk r=searchresult.get(i);
+			rids[i]=Integer.toString(r.getRid());
+			rnames[i]=typename[r.getType()];
+			int s = r.getState();
+			int a = r.getAffect();
+			switch(s){
+				case 0:states[i] = "未发生";break;
+				case 1:states[i] = "已发生";break;
+				default:states[i] = "已解决";
+			}
+			switch(a){
+				case 0:affects[i] = "低";break;
+				case 1:affects[i] = "中";break;
+				default:affects[i] = "高";
+			}
+		}
+		
+		sc.setAttribute("rids", rids);
+		sc.setAttribute("rnames", rnames);
+		sc.setAttribute("affects", affects);
+		sc.setAttribute("states", states);
+		
+	//	sc.setAttribute("searchinplanresult", searchresult);
 		
 		return success;
 	}

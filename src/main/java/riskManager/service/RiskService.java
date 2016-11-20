@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Date;
 
 import riskManager.model.Risk;
-import riskManager.model.Statistic;
+//import riskManager.model.Statistic;
 
 public interface RiskService {
 	Risk save(Risk risk);
@@ -27,7 +27,7 @@ public interface RiskService {
 	
 	boolean delete(Risk risk);
 	
-	List<Statistic> statisticIdentify(Date start,Date end);
+	List<Risk> statisticIdentify(String start,String end);
 	
-	List<Statistic> statisticFault(Date start,Date end);
+	List<Risk> statisticFault(String start,String end);
 }

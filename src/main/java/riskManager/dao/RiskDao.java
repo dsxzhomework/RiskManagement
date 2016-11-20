@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import riskManager.model.Risk;
-import riskManager.model.Statistic;
 
 public interface RiskDao {
 	Risk save(Risk risk);
@@ -27,7 +26,7 @@ public interface RiskDao {
 	
 	void delete(Risk risk);
 	
-    List<Statistic> statisticIdentify(Date start,Date end);
+    List<Risk> statisticIdentify(String start,String end);
 	
-	List<Statistic> statisticFault(Date start,Date end);
+	List<Risk> statisticFault(String start,String end);
 }

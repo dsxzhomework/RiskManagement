@@ -1,7 +1,6 @@
 package riskManager.dao.impl;
 
 import java.sql.ResultSet;
-import java.util.Date;
 import java.util.*;
 
 import org.hibernate.Session;
@@ -11,7 +10,7 @@ import hibernate3.support.YeekuHibernateDaoSupport;
 import riskManager.dao.BaseDao;
 import riskManager.dao.RiskDao;
 import riskManager.model.Risk;
-import riskManager.model.Statistic;
+//import riskManager.model.Statistic;
 
 public class RiskDaoImpl extends YeekuHibernateDaoSupport implements RiskDao{
 	
@@ -81,40 +80,45 @@ public class RiskDaoImpl extends YeekuHibernateDaoSupport implements RiskDao{
 	}
 
 	@Override
-	public List<Statistic> statisticIdentify(Date start, Date end) {
+	public List<Risk> statisticIdentify(String start, String end) {
 		// TODO Auto-generated method stub
-		String sql = "select t.type from (select type,count(type) from riskManager.model.Risk where buildtime between '"+start+"' and '"+end+"' group by type order by count(type) desc) t";
+		String sql="from riskManager.model.Risk where buildtime between '"+start+"' and '"+end+"'";
+	//	String sql = "select t.type from (select type,count(type) from riskManager.model.Risk where buildtime between '"+start+"' and '"+end+"' group by type order by count(type) desc) t";
 		Session session = baseDao.getNewSession();
-		List<Integer> resulttype = session.createQuery(sql).list();
-		String sql2 ="select t.count(type) from (select type,count(type) from riskManager.model.Risk where buildtime between '"+start+"' and '"+end+"' group by type order by count(type) desc) t";
-		List<Integer> resultcount=session.createQuery(sql2).list();
+	//	List<Integer> resulttype = session.createQuery(sql).list();
+	//	String sql2 ="select t.count(type) from (select type,count(type) from riskManager.model.Risk where buildtime between '"+start+"' and '"+end+"' group by type order by count(type) desc) t";
+	//	List<Integer> resultcount=session.createQuery(sql2).list();
 	//	Statistic s;
-		List<Statistic> result=new ArrayList();
-		int si=resulttype.size();
-		for(int i=0;i<si;i++){
-			Statistic s=new Statistic(resulttype.get(i),resultcount.get(i));
-			result.add(s);
-		}
+	//	System.out.println(session.createQuery(sql));
+		List<Risk> result=session.createQuery(sql).list();
+	//	List<Statistic> result=new ArrayList();
+	//	int si=resulttype.size();
+	//	for(int i=0;i<si;i++){
+	//		Statistic s=new Statistic(resulttype.get(i),resultcount.get(i));
+	//		result.add(s);
+	//	}
 		return result;
 	}
 
 	@Override
-	public List<Statistic> statisticFault(Date start, Date end) {
+	public List<Risk> statisticFault(String start, String end) {
 		// TODO Auto-generated method stub
-		String sql = "select t.type from (select type,count(type) from riskManager.model.Risk where changetime between '"+start+"' and '"+end+"' group by type order by count(type) desc) t";
-		String sql2="select t.count(type) from (select type,count(type) from riskManager.model.Risk where changetime between '"+start+"' and '"+end+"' group by type order by count(type) desc) t";
+		String sql="from riskManager.model.Risk where changetime between '"+start+"' and '"+end+"'";
+	//	String sql = "select t.type from (select type,count(type) from riskManager.model.Risk where changetime between '"+start+"' and '"+end+"' group by type order by count(type) desc) t";
+	//	String sql2="select t.count(type) from (select type,count(type) from riskManager.model.Risk where changetime between '"+start+"' and '"+end+"' group by type order by count(type) desc) t";
 		Session session = baseDao.getNewSession();
-		List<Integer> resulttype = session.createQuery(sql).list();
-		List<Integer> resultcount=session.createQuery(sql2).list();
-		List<Statistic> result=new ArrayList();
-		int si=resulttype.size();
-		for(int i=0;i<si;i++){
-			Statistic s=new Statistic(resulttype.get(i),resultcount.get(i));
-			result.add(s);
-		}
+	//	List<Integer> resulttype = session.createQuery(sql).list();
+	//	List<Integer> resultcount=session.createQuery(sql2).list();
+		List<Risk> result=session.createQuery(sql).list();
+	//	List<Statistic> result=new ArrayList();
+	//	int si=resulttype.size();
+	//	for(int i=0;i<si;i++){
+	//		Statistic s=new Statistic(resulttype.get(i),resultcount.get(i));
+	//		result.add(s);
+	//	}
 		return result;
 	}
-
+	
 	@Override
 	public List<Risk> findByType(int pid, int type) {
 		// TODO Auto-generated method stub
@@ -159,7 +163,5 @@ public class RiskDaoImpl extends YeekuHibernateDaoSupport implements RiskDao{
 		List<Risk> result=session.createQuery(sql).list();
 		return result;
 	}
-
-	
 	
 }

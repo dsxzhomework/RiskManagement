@@ -11,6 +11,7 @@ import java.util.*;
 
 import riskManager.model.Project;
 import riskManager.model.User;
+import riskManager.model.Statistic;
 
 public class LoginAction extends BaseAction{
 
@@ -85,6 +86,9 @@ public class LoginAction extends BaseAction{
 		sc.setAttribute("pids", pids);
 		sc.setAttribute("pnames",pnames);
 		sc.setAttribute("mangers", mangers);
+		
+		List<Statistic> statisticresult=new ArrayList();
+		sc.setAttribute("statisticresult", statisticresult);
 		
 		String[] developers = (String[])sc.getAttribute("developers");
 		String[] developer_names = (String[])sc.getAttribute("developers_names");
