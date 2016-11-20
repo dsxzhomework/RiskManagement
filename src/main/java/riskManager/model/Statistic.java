@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 
-@Entity
 public class Statistic implements Serializable{
 
 	private int type;
