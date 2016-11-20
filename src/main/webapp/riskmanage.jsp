@@ -9,6 +9,18 @@
 <script language="javascript" type="text/javascript" src="./js/jquery-1.9.0.min.js"></script>
 <title>RiskManagement</title>
 <style type="text/css">
+	#button {
+		width:100px;
+		font-size:1em;
+		padding:10px 25px;
+		font-family: 'ambleregular';
+		background:#FC7D01;
+		text-transform:uppercase;
+		color: #FFF;
+		border:none;
+		text-decoration: none;
+		outline: 0;
+	}
 	h1{
 		font-size: 25px;
 		padding: 20px 0px 10px 40px;
@@ -64,53 +76,16 @@
 <!-- title -->
 <h1><%= (String)request.getServletContext().getAttribute("pname")%></h1>
 <!-- title -->
-<!-- member -->
-<div id="member" >
-<div class="component">
-	<table>
-		<thead>
-				<tr>
-                    <th>id</th>
-					<th>名字</th>
-					<th>角色</th>
-				</tr>
-			</thead>
-			<% 
-				String[] mids = (String[])request.getServletContext().getAttribute("mids");
-				String[] mnames=(String[])request.getServletContext().getAttribute("mnames");
-				String[] mroles=(String[])request.getServletContext().getAttribute("mroles");
-				%>
-				<tbody>
-				<% 
-				if (mids.length > 0) {
-					for (int i=0;i < mids.length;i++) {
-							
-			%>		
-				<tr>
-                    <td><%=mids[i] %></td>
-                    <td><%=mnames[i] %></td>
-                    <td><%=mroles[i] %></td>
-                </tr>
-						
-			<%
-					}
-				} 
-			%>
-			<tbody>
-		</table>
-	</div>
-</div>
-
-<!-- member -->
 <!-- risklist -->
-<div id="riskList" class="hidden">
-	<div class="mybutton">
+<div id="riskList">
+	<div id="button">
 		<a href="/RiskManagement/addrisk.jsp" style="color: #000">添加风险</a>
-		
 	</div>
-	<a href="/RiskManagement/addrisk.jsp" style="color: #000">导入</a>
+	<div id="button" style="margin-left:200px;margin-top:-38px;">
+		<a href="/RiskManagement/riskimport.jsp" style="color: #000;">导入风险</a>
+	</div>
 	<br>
-	<div class="component">
+	<div class="component" style="margin-top:-40px;">
 	<table>
 		<thead>
 				<tr>

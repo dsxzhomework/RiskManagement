@@ -67,7 +67,7 @@
 	    }
 </script>
 <div class="create">
-        <%
+		 <%
 		String role = (String)request.getServletContext().getAttribute("role"); 
 		if (role.equals("manager")) {
 	    %>
@@ -77,8 +77,8 @@
 	    <%
 	    } 
 	    %>
+
 </div>
-    
 </div>
 </body>
 </html>

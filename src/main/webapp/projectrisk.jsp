@@ -10,7 +10,7 @@
 <div><p><%= (String)request.getServletContext().getAttribute("pname")%></p></div>
 <div>
 <ul id = "risklist">
-<a href="/RiskManagement/addrisk.jsp">添加风险</a>
+	<a href="/RiskManagement/addrisk.jsp">添加风险</a>
 					<% 
 					String[] rids = (String[])request.getServletContext().getAttribute("rids");
 					String[] names=(String[])request.getServletContext().getAttribute("rnames");
