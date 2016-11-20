@@ -6,6 +6,7 @@ import java.util.List;
 import riskManager.dao.RiskDao;
 import riskManager.model.Risk;
 import riskManager.service.RiskService;
+import riskManager.model.Statistic;
 
 public class RiskServiceImpl implements RiskService {
 	private RiskDao riskDao;
@@ -54,13 +55,13 @@ public class RiskServiceImpl implements RiskService {
 	}
 
 	@Override
-	public List<Integer> statisticIdentify(Date start, Date end) {
+	public List<Statistic> statisticIdentify(Date start, Date end) {
 		// TODO Auto-generated method stub
 		return riskDao.statisticIdentify(start, end);
 	}
 
 	@Override
-	public List<Integer> statisticFault(Date start, Date end) {
+	public List<Statistic> statisticFault(Date start, Date end) {
 		// TODO Auto-generated method stub
 		return riskDao.statisticFault(start, end);
 	}

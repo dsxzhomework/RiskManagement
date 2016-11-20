@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 //import riskManager.model.Risk;
 import riskManager.service.RiskService;
+import riskManager.model.Statistic;
 
 public class RiskstatisticAction extends BaseAction{
 
@@ -24,7 +25,7 @@ public class RiskstatisticAction extends BaseAction{
 		
 		ServletContext sc=request.getServletContext();
 		
-	//	String sorttype=request.getParameter("sorttype");
+		String sorttype=request.getParameter("statictype");
 		String timestart=request.getParameter("searchtimestart");
 		String timeend=request.getParameter("searchtimeend");
 		
@@ -38,10 +39,11 @@ public class RiskstatisticAction extends BaseAction{
 			e.printStackTrace();
 		}
 		
-		List<Integer> resultidentify=riskService.statisticIdentify(start, end);
-		List<Integer> resultfault=riskService.statisticFault(start, end);
+		List<Statistic> resultidentify=riskService.statisticIdentify(start, end);
+		List<Statistic> resultfault=riskService.statisticFault(start, end);
 		
-		int sizeidentify=resultidentify.size();
+		/**
+		 * int sizeidentify=resultidentify.size();
 		String[] identifyrisklist=new String[sizeidentify];
 		for(int i=0;i<sizeidentify;i++){
 			identifyrisklist[i]=Integer.toString(resultidentify.get(i));
@@ -52,20 +54,20 @@ public class RiskstatisticAction extends BaseAction{
 		for(int i=0;i<sizefault;i++){
 			faultrisklist[i]=Integer.toString(resultfault.get(i));
 		}
-		
 		sc.setAttribute("identifyrisklist", identifyrisklist);
 		sc.setAttribute("faultrisklist", faultrisklist);
+		 */
 		
-		/**
-		if(sorttype.equals("identify")){
-			
+		
+		if(sorttype.equals("identifymost")){
+			sc.setAttribute("statisticresult", resultidentify);
 		}else{
-			if(sorttype.equals("fault")){
-				
+			if(sorttype.equals("questionmost")){
+				sc.setAttribute("statisticresult", resultfault);
 			}else{
 				success="incomplete condition";
 			}
-		}*/
+		}
 		
 		return success;
 	}

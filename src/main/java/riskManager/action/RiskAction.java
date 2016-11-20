@@ -187,14 +187,92 @@ public class RiskAction extends BaseAction{
 		SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
 		
 		List<Risk> searchresult=new ArrayList();
+		List<Risk> projectrisk=riskService.findByPid(pid);
 		
-		String condition=request.getParameter("searchinplan");
-		String search=request.getParameter("searchinplaninput");
+		int conditiontype=Integer.parseInt(request.getParameter("searchtype"));
+		int conditionstate=Integer.parseInt(request.getParameter("searchstate"));
+	//	int search=0;
 		
-		//搜索条件类型为空
+		if(conditiontype==-1&&conditionstate==-1){
+			searchresult=projectrisk;
+		}
+		if(conditiontype==-1&&conditionstate!=-1){
+			for(int i=0;i<projectrisk.size();i++){
+				Risk r=projectrisk.get(i);
+				if(r.getState()==conditionstate){
+					searchresult.add(r);
+				}else{
+					continue;
+				}
+			}
+		}
+		if(conditiontype!=-1&&conditionstate==-1){
+			for(int i=0;i<projectrisk.size();i++){
+				Risk r=projectrisk.get(i);
+				if(r.getType()==conditiontype){
+					searchresult.add(r);
+				}else{
+					continue;
+				}
+			}
+		}
+		if(conditiontype!=-1&&conditionstate!=-1){
+			for(int i=0;i<projectrisk.size();i++){
+				Risk r=projectrisk.get(i);
+				if(r.getType()==conditiontype&&r.getState()==conditionstate){
+					searchresult.add(r);
+				}else{
+					continue;
+				}
+			}
+		}
+		
+		/**
+		 * //搜索条件类型为空
 		if(condition==null){
 			searchresult=riskService.findByPid(pid);
 		}
+		if(condition.equals("searchptype0")){
+			search=0;
+			searchresult=riskService.findByType(pid, search);
+		}
+		if(condition.equals("searchptype1")){
+			search=1;
+			searchresult=riskService.findByType(pid, search);
+		}
+		if(condition.equals("searchptype2")){
+			search=2;
+			searchresult=riskService.findByType(pid, search);
+		}
+		if(condition.equals("searchptype3")){
+			search=3;
+			searchresult=riskService.findByType(pid, search);
+		}
+		if(condition.equals("searchptype4")){
+			search=4;
+			searchresult=riskService.findByType(pid, search);
+		}
+		if(condition.equals("searchptype5")){
+			search=5;
+			searchresult=riskService.findByType(pid, search);
+		}
+		if(condition.equals("searchptype6")){
+			search=6;
+			searchresult=riskService.findByType(pid, search);
+		}
+		if(condition.equals("searchpstate1")){
+			search=1;
+			searchresult=riskService.findByState(pid, search);
+		}
+		if(condition.equals("searchpstate2")){
+			search=1;
+			
+		}
+		 */
+		/**
+		 * String search=request.getParameter("searchinplaninput");
+		
+		
 		//搜索条件类型不为空且不为全部，但搜索具体条件为空
 		if(condition!=null&&(!condition.equals("all"))&&search==null){
 			success="incomplete condition";
@@ -219,6 +297,37 @@ public class RiskAction extends BaseAction{
 		}
 		//按跟踪者
 		if(condition.equals("searchptracker")){
+			int searchtype=0;
+			if(search.equals("人员变动")){
+				searchtype=0;
+			}else{
+				if(search.equals("缺乏共识")){
+					searchtype=1;
+				}else{
+					if(search.equals("资金不足")){
+						searchtype=2;
+					}else{
+						if(search.equals("设备故障")){
+							searchtype=3;
+						}else{
+							if(search.equals("设计欠缺")){
+								searchtype=4;
+							}else{
+								if(search.equals("计划过于乐观")){
+									searchtype=5;
+								}else{
+									if(search.equals("")){
+										searchtype=6;
+									}else{
+										success="uncompatible input";
+										return success;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 			searchresult=riskService.findByTracker(pid, Integer.parseInt(search));
 		}
 		//按状态
@@ -241,13 +350,13 @@ public class RiskAction extends BaseAction{
 			searchresult=riskService.findByState(pid,searchstate);
 		}
 		//项目风险管理计划全部风险
-		if(condition.equals("all")){
+		if(condition.equals("searchall")){
 			searchresult=riskService.findByPid(pid);
-		}
+		 */
 		
 		//所得结果为空
 		if(searchresult.size()==0){
-			success="inexistence";
+			success="empty";
 			return success;
 		}
 		
