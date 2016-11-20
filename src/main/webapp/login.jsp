@@ -41,7 +41,7 @@
 					<p style="color:blue">用户ID：<%=newid %></p>
 				<%} %>
 				<input type="text" class="text" name="id" placeholder="账号" onfocus="this.value = '';"  >
-				<input type="password" name="ps" placeholder="密码" onfocus="this.value = '';" >
+				<input type="password" name="ps" placeholder="密码" onfocus="this.value = '';"  >
 				<div class="submit">
 					<input type="submit" value="登录" >
 				</div>	

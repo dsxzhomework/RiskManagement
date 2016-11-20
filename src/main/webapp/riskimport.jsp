@@ -77,9 +77,17 @@
 	<script type="text/javascript">
 	function choose(){
 		document.getElementById('import_risklist').className="display";
+		
 	}
 	function importRid(){
 		var inputs = document.getElementById("rrisk").getElementsByTagName("input");
+		var cc=0;
+		for(var i=0;i<inputs.length;i++){
+			if(inputs[i].type=="checkbox"){
+				cc = cc + 1;
+			}
+		}
+	
 		for(var i=0;i < inputs.length;i++){
 			if(inputs[i].type=="checkbox") {
 				if(inputs[i].checked){
@@ -87,10 +95,11 @@
 					var tr = checkedRow.parentNode.parentNode;
 	         		var tds = tr.cells;
 	         		//loop column
+	         		
 	         		for(var j = 1;j < tds.length;j++){		 
 						var str="";             
           				str += "title:"+tds[j].title+ "~ value:"+tds[j].value+"~innerHTML:"+tds[j].innerHTML ;
-          				alert(str);                 		             
+          				                		             
        				}
 				}
 			}
@@ -101,31 +110,39 @@
 	<table id="rrisk">
 		<thead>
 				<tr>
+					<th>导入</th>
                     <th>类型</th>
 					<th>危险程度</th>
 					<th>状态</th>
 					<th>查看</th>
-					<th>删除</th>
-					<th>是否导入</th>
 				</tr>
 			</thead>
+			<% 
+				String[] rids = (String[])request.getServletContext().getAttribute("rids");
+				String[] names=(String[])request.getServletContext().getAttribute("rnames");
+				String[] affects=(String[])request.getServletContext().getAttribute("affects");
+				String[] states=(String[])request.getServletContext().getAttribute("states");
+				%>
 				<tbody>
+<% 
+				if (rids.length > 0) {
+					for (int i=0;i < rids.length;i++) {
+						String rid=rids[i];
+						String name=names[i];
+							//String rid=Integer.toString(risklist.get(i).getRid());
+			%>		
 				<tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                   	<td>5</td>
- 					<td><input type="checkbox"></td> 
+					<td><input type="checkbox"></td> 
+                    <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>"><%=names[i] %></a></td>
+                    <td><%=affects[i] %></td>
+                    <td><%=states[i] %></td>
+                    <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>">查看</a></td>
                 </tr>
-                <tr>
-                    <td>2-1</td>
-                    <td>2-2</td>
-                    <td>2-3</td>
-                    <td>2-4</td>
-                   	<td>2-5</td>
- 					<td><input type="checkbox"></td> 
-                </tr>
+						
+			<%
+					}
+				} 
+			%>
 			</tbody>
 		</table>
 	</div>

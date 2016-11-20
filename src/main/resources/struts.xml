@@ -66,6 +66,31 @@
 			<result name="success" type="redirect">home.jsp</result>
 		</action>
 
+		
+		<action name="addrp" class="riskManager.action.RiskPlanAction" method="addRiskPlan">
+			<result name="success" type="redirect">/RiskManagement/showrplist</result>
+		</action>
+
+		<action name="showrplist" class="riskManager.action.RiskPlanAction" method="showRPList">
+			<result name="success" type="redirect">myriskplan.jsp</result>
+		</action>
+
+		<action name="showrp" class="riskManager.action.RiskPlanAction" method="showRiskList">
+			<result name="success" type="redirect">showriskplan.jsp</result>
+		</action>
+
+		<action name="import" class="riskManager.action.RiskPlanAction" method="importRisk">
+			<result name="success" type="redirect">import.jsp</result>
+		</action>
+		
+		<action name="import" class="riskManager.action.RiskPlanAction" method="importRisk">
+			<result name="success" type="redirect">import.jsp</result>
+		</action>
+
+		<action name="deleterr" class="riskManager.action.RiskPlanAction" method="deleteRisk">
+			<result name="success" type="redirect">/RiskManagement/showrp</result>
+		</action>
+		
 	</package>
 
 </struts>
