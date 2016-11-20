@@ -90,18 +90,20 @@
 		<%          
 		//0：人员变动；1：缺乏共识；2：资金不足；3：设备故障；4：设计欠缺；5：计划过于乐观；6：其他
  		%>
-			<option value="searchptype0">人员变动</option>
-			<option value="searchptype1">缺乏共识</option>
-			<option value="searchptype2">资金不足</option>
-			<option value="searchptype3">设备故障</option>
-			<option value="searchptype4">设计欠缺</option>
-			<option value="searchptype5">计划过于乐观</option>
-			<option value="searchptype6">其他</option>
+ 			<option value="-1">--</option>
+			<option value="0">人员变动</option>
+			<option value="1">缺乏共识</option>
+			<option value="2">资金不足</option>
+			<option value="3">设备故障</option>
+			<option value="4">设计欠缺</option>
+			<option value="5">计划过于乐观</option>
+			<option value="6">其他</option>
 		</select>
 		状态：<select name="searchstate">
-			<option value="searchpstate0">未发生</option>
-			<option value="searchpstate1">已发生</option>
-			<option value="searchpstate2">已解决</option>
+			<option value="-1">--</option>
+			<option value="0">未发生</option>
+			<option value="1">已发生</option>
+			<option value="2">已解决</option>
 
 		</select>
 		<input type="submit" value="确定"> 
