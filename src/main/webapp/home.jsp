@@ -22,6 +22,9 @@
 				<ul>
 					<%
 					String uname = (String)request.getServletContext().getAttribute("uname");
+					if(request.getServletContext().getAttribute("uid")==null){
+            	    	response.sendRedirect("login.jsp"); 
+            	    }
 					%>
 					<li><a href="#" target="_blank"><%=uname %></a></li>
 					<li><a href="/RiskManagement/loginout" target="_blank">登出</a></li>
