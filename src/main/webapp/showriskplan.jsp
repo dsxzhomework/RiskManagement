@@ -9,18 +9,6 @@
 <script language="javascript" type="text/javascript" src="./js/jquery-1.9.0.min.js"></script>
 <title>RiskManagement</title>
 <style type="text/css">
-	#button {
-		width:100px;
-		font-size:1em;
-		padding:10px 25px;
-		font-family: 'ambleregular';
-		background:#FC7D01;
-		text-transform:uppercase;
-		color: #FFF;
-		border:none;
-		text-decoration: none;
-		outline: 0;
-	}
 	h1{
 		font-size: 25px;
 		padding: 20px 0px 10px 40px;
@@ -28,13 +16,6 @@
 		border-bottom:1px solid #E4E4E4;
 		margin: -10px -15px 30px -10px;
 		color: dark;
-	}
-	.hidden{
-    	display: none;
-	}
-	.display{
-	    widows: inherit;
-	    height: inherit;
 	}
 </style>
 </head>
@@ -47,13 +28,9 @@
 				<div class="nav_list">
 					<ul>
 						<li><a href="home.jsp">主页</a></li>
-						
-						<% String pname = (String)request.getServletContext().getAttribute("pname"); 
-							String rname = (String)request.getServletContext().getAttribute("rname");
+						<% String rpname = (String)request.getServletContext().getAttribute("rpname"); 
 						%>
-						<li><a href="showproject.jsp"><%=pname %></a></li>	
-						<li><a href="showproject.jsp">项目成员</a></li>	
-						<li><a href="riskmanage.jsp">风险管理计划</a></li>	
+						<li><a href="/RiskManagement/showrplist">RA列表</a></li>	
 					</ul>
 				</div>
 					<div class="account_desc">
@@ -74,43 +51,16 @@
 
 <div class="wrap">
 <!-- title -->
-<h1><%= (String)request.getServletContext().getAttribute("pname")%></h1>
+<h1><%= (String)request.getServletContext().getAttribute("rpname")%></h1>
 <!-- title -->
 <!-- risklist -->
 <div id="riskList">
-	<div id="button">
-		<a href="/RiskManagement/addrisk.jsp" style="color: #000">添加风险</a>
+	<div class="mybutton">
+		<a href="/RiskManagement/addrisk.jsp" style="color: #000">导入</a>
 	</div>
-	<div id="button" style="margin-left:200px;margin-top:-38px;float:left;">
-		<a href="/RiskManagement/riskimport.jsp" style="color: #000;">导入风险</a>
-	</div>
-	<div id="search" style="margin-left:400px;margin-top:-30px;float:left;">
-	<form action="searchrisk">
-		类型：<select name="searchtype">
-		<%          
-		//0：人员变动；1：缺乏共识；2：资金不足；3：设备故障；4：设计欠缺；5：计划过于乐观；6：其他
- 		%>
- 			<option value="-1">--</option>
-			<option value="0">人员变动</option>
-			<option value="1">缺乏共识</option>
-			<option value="2">资金不足</option>
-			<option value="3">设备故障</option>
-			<option value="4">设计欠缺</option>
-			<option value="5">计划过于乐观</option>
-			<option value="6">其他</option>
-		</select>
-		状态：<select name="searchstate">
-			<option value="-1">--</option>
-			<option value="0">未发生</option>
-			<option value="1">已发生</option>
-			<option value="2">已解决</option>
 
-		</select>
-		<input type="submit" value="确定"> 
-	</form>
-	</div>
 	<br>
-	<div class="component" style="margin-top:-40px;">
+	<div class="component">
 	<table>
 		<thead>
 				<tr>
@@ -140,11 +90,7 @@
                     <td><%=affects[i] %></td>
                     <td><%=states[i] %></td>
                     <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>">查看</a></td>
-                    <%if(states[i].equals("未发生")){ %>
-                   	<td><a href="/RiskManagement/deleteRisk?rid=<%=rids[i]%>">删除</a></td>
-                    <%}else{ %>
- 					<td style="color: grey;">删除</td> 
-                    <%} %>
+                   	<td><a href="/RiskManagement/deleterr?rid=<%=rids[i]%>">删除</a></td>            
                 </tr>
 						
 			<%

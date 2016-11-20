@@ -102,6 +102,25 @@
 		<property name="riskService" ref="riskService" ></property>
 	</bean>	
 	
+	<bean id="rpidridDao" class="riskManager.dao.impl.RpidRidDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	
+	<bean id="riskplanDao" class="riskManager.dao.impl.RiskPlanDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	
+	<bean id="riskplanService" class="riskManager.service.impl.RiskPlanServiceImpl">
+		<property name="riskDao" ref="riskDao" ></property>
+		<property name="riskplanDao" ref="riskplanDao" ></property>
+		<property name="rpidridDao" ref="rpidridDao" ></property>
+	</bean>	
+	
+	<bean id="riskplanAction" class="riskManager.action.RiskPlanAction">
+		<property name="rpservice" ref="riskplanService" ></property>
+	</bean>	
+	
+	
 	<!-- 定义 Autowired 自动注入 bean -->
 	<bean
 		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
