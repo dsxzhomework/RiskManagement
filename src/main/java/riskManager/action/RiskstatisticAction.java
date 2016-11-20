@@ -28,8 +28,7 @@ public class RiskstatisticAction extends BaseAction{
 		this.riskService=riskService;
 	}
 	
-	@Override
-	public String execute(){
+	public String statistic(){
 		
 		ServletContext sc=request.getServletContext();
 		
@@ -37,8 +36,8 @@ public class RiskstatisticAction extends BaseAction{
 		String timestart=request.getParameter("searchtimestart");
 		String timeend=request.getParameter("searchtimeend");
 		
-	//	System.out.println(timestart);
-	//	System.out.println(timeend);
+		System.out.println(timestart);
+		System.out.println(timeend);
 		/*
 		Date start=null;
 		Date end=null;
@@ -84,6 +83,7 @@ public class RiskstatisticAction extends BaseAction{
 			default:typecount[6][1]++;
 			}
 		}
+		/*
 		for(int i=0;i<7;i++){
 			int t=typecount[i][0];
 			int c=typecount[i][1];
@@ -99,7 +99,7 @@ public class RiskstatisticAction extends BaseAction{
 					continue;
 				}
 			}
-		}
+		}*/
 		
 		List<Statistic> result=new ArrayList();
 		for(int i=0;i<7;i++){
@@ -140,6 +140,141 @@ public class RiskstatisticAction extends BaseAction{
 		}*/
 		sc.setAttribute("statisticresult", result);
 		
+		return success;
+	}
+	
+	public String importrisk(){
+        ServletContext sc=request.getServletContext();
+		
+		String sorttype=request.getParameter("statictype");
+		String timestart=request.getParameter("searchtimestart");
+		String timeend=request.getParameter("searchtimeend");
+		
+		System.out.println(timestart);
+		System.out.println(timeend);
+		
+        List<Risk> listtime=new ArrayList();
+		
+		if(sorttype.equals("identifymost")){
+			listtime=riskService.statisticIdentify(timestart, timeend);
+		}
+		if(sorttype.equals("questionmost")){
+			listtime=riskService.statisticFault(timestart, timeend);
+		}
+		
+		int[][] typecount=new int[7][2];
+		typecount[0][0]=0;
+		typecount[1][0]=1;
+		typecount[2][0]=2;
+		typecount[3][0]=3;
+		typecount[4][0]=4;
+		typecount[5][0]=5;
+		typecount[6][0]=6;
+		int size=listtime.size();
+		for(int i=0;i<size;i++){
+			Risk r=listtime.get(i);
+			int rt=r.getType();
+			System.out.println(rt+"");
+			switch(rt){
+			case 0:typecount[0][1]++;;break;
+			case 1:typecount[1][1]++;break;
+			case 2:typecount[2][1]++;break;
+			case 3:typecount[3][1]++;break;
+			case 4:typecount[4][1]++;break;
+			case 5:typecount[5][1]++;break;
+			default:typecount[6][1]++;
+			}
+		}
+		for(int i=0;i<7;i++){
+			int t=typecount[i][0];
+			int c=typecount[i][1];
+			for(int j=i+1;j<7;j++){
+				if(c<typecount[j][1]){
+					typecount[i][0]=typecount[j][0];
+					typecount[i][1]=typecount[j][1];
+					typecount[j][0]=t;
+					typecount[j][1]=c;
+					t=typecount[i][0];
+					c=typecount[i][1];
+				}else{
+					continue;
+				}
+			}
+		}
+		
+		List<Risk> result=new ArrayList();
+		for(int i=0;i<listtime.size();i++){
+			Risk rl=listtime.get(i);
+			int tt=rl.getType();
+			if(tt==typecount[0][0])
+				result.add(rl);
+		}
+		for(int i=0;i<listtime.size();i++){
+			Risk rl=listtime.get(i);
+			int tt=rl.getType();
+			if(tt==typecount[1][0])
+				result.add(rl);
+		}
+		for(int i=0;i<listtime.size();i++){
+			Risk rl=listtime.get(i);
+			int tt=rl.getType();
+			if(tt==typecount[2][0])
+				result.add(rl);
+		}
+		for(int i=0;i<listtime.size();i++){
+			Risk rl=listtime.get(i);
+			int tt=rl.getType();
+			if(tt==typecount[3][0])
+				result.add(rl);
+		}
+		for(int i=0;i<listtime.size();i++){
+			Risk rl=listtime.get(i);
+			int tt=rl.getType();
+			if(tt==typecount[4][0])
+				result.add(rl);
+		}
+		for(int i=0;i<listtime.size();i++){
+			Risk rl=listtime.get(i);
+			int tt=rl.getType();
+			if(tt==typecount[5][0])
+				result.add(rl);
+		}
+		for(int i=0;i<listtime.size();i++){
+			Risk rl=listtime.get(i);
+			int tt=rl.getType();
+			if(tt==typecount[6][0])
+				result.add(rl);
+		}
+		
+		String[] typename = {"人员变动","缺乏共识","资金不足","设备故障","设计欠缺","计划过于乐观","其他"};
+		int resultsize=result.size();
+		String[] rids=new String[size];
+		String[] rnames=new String[size];
+		String[] affects=new String[size];
+		String[] states=new String[size];
+		
+		for(int i=0;i<size;i++){
+			Risk r=result.get(i);
+			rids[i]=Integer.toString(r.getRid());
+			rnames[i]=typename[r.getType()];
+			int s = r.getState();
+			int a = r.getAffect();
+			switch(s){
+				case 0:states[i] = "未发生";break;
+				case 1:states[i] = "已发生";break;
+				default:states[i] = "已解决";
+			}
+			switch(a){
+				case 0:affects[i] = "低";break;
+				case 1:affects[i] = "中";break;
+				default:affects[i] = "高";
+			}
+		}
+		
+		sc.setAttribute("rids", rids);
+		sc.setAttribute("rnames", rnames);
+		sc.setAttribute("affects", affects);
+		sc.setAttribute("states", states);
 		return success;
 	}
 }

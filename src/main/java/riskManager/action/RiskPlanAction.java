@@ -55,10 +55,14 @@ public class RiskPlanAction extends BaseAction{
 	}
 	
 	public String showRiskList(){
-		int rpid = Integer.parseInt(request.getParameter("rpid"));
-		List<Risk> rl = rpservice.findRiskByRpid(rpid);
 		ServletContext sc = request.getServletContext();
-
+		int rpid = 0;
+		if(request.getParameter("rpid")!=null)
+			rpid = Integer.parseInt(request.getParameter("rpid"));
+		else{
+			rpid = (int) sc.getAttribute("rpid");
+		}
+		List<Risk> rl = rpservice.findRiskByRpid(rpid);
 		String[] rid = new String[rl.size()];
 		String[] rname = new String[rl.size()];
 		String[] content = new String[rl.size()];
@@ -105,9 +109,17 @@ public class RiskPlanAction extends BaseAction{
 	public String importRisk(){
 		ServletContext sc = request.getServletContext();
 		int rpid = (int) sc.getAttribute("rpid");
+
+		String index = request.getParameter("index");
+		String[] in = index.split(",");	
+		String[] rids = (String[]) sc.getAttribute("rids");	
 		
-		int[] rids = null;
-		for(int id:rids){
+		int[] importids = new int[in.length];
+		for(int i=0;i<in.length;i++){
+			importids[i] = Integer.parseInt(rids[Integer.parseInt(in[i])]);		
+		}
+	
+		for(int id:importids){
 			RpidRid rr = new RpidRid(rpid,id);
 			rpservice.addRisk(rr);
 		}

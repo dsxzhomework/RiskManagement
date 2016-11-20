@@ -82,7 +82,7 @@ public class ProjectAction extends BaseAction{
 		ServletContext sc = request.getServletContext();
 		int pid = 1;
 		if(request.getParameter("pid")==null){
-			pid = Integer.parseInt((String)sc.getAttribute("pid"));
+			pid = (int)sc.getAttribute("pid");
 		}else{
 			pid = Integer.parseInt(request.getParameter("pid"));
 		}
@@ -137,6 +137,17 @@ public class ProjectAction extends BaseAction{
 		sc.setAttribute("mids", mids);
 		sc.setAttribute("mnames", mnames);
 		sc.setAttribute("mroles", mroles);
+		return success;
+	}
+	
+	
+	public String addMember(){
+		String memberid = (String) request.getParameter("memberid");
+		int mid = Integer.parseInt(memberid);
+		int[] member = new int[]{mid};
+		ServletContext sc = request.getServletContext();
+		int pid = (int) sc.getAttribute("pid");
+		projectService.addMember(member,pid);
 		return success;
 	}
 }

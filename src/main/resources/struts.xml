@@ -27,6 +27,10 @@
 			<result name="success" type="redirect">/RiskManagement/showproject</result>
 		</action>
 		
+		<action name="addmember" class="riskManager.action.ProjectAction" method="addMember">
+			<result name="success" type="redirect">/RiskManagement/showproject</result>
+		</action>
+		
 		<action name="admin" class="riskManager.action.AdminAction">
 		    <result name="success" type="redirect">admin.jsp</result>
 		    <result name="fail" type="redirect">admin.jsp?error=1</result>
@@ -58,15 +62,10 @@
 		</action>
 		
 		<action name="changeState" class="riskManager.action.RiskAction" method="change">
-			<result name="success" type="redirect">showrisk.jsp</result>
+			<result name="success" type="redirect">/RiskManagement/showRisk</result>
 			<result name="fail" type="redirect">show.jsp?error=1</result>
 		</action>
 
-		<action name="project" class="riskManager.action.ProjectAction">
-			<result name="success" type="redirect">home.jsp</result>
-		</action>
-
-		
 		<action name="addrp" class="riskManager.action.RiskPlanAction" method="addRiskPlan">
 			<result name="success" type="redirect">/RiskManagement/showrplist</result>
 		</action>
@@ -80,17 +79,30 @@
 		</action>
 
 		<action name="import" class="riskManager.action.RiskPlanAction" method="importRisk">
-			<result name="success" type="redirect">import.jsp</result>
-		</action>
-		
-		<action name="import" class="riskManager.action.RiskPlanAction" method="importRisk">
-			<result name="success" type="redirect">import.jsp</result>
+			<result name="success" type="redirect">/RiskManagement/showrp</result>
 		</action>
 
 		<action name="deleterr" class="riskManager.action.RiskPlanAction" method="deleteRisk">
 			<result name="success" type="redirect">/RiskManagement/showrp</result>
 		</action>
 		
+		<action name="searchrisk" class="riskManager.action.RiskAction" method="findinproject">
+		    <result name="success" type="redirect">riskmanage.jsp</result>
+		</action>
+		
+		
+		<action name="statistic" class="riskManager.action.RiskstatisticAction" method="statistic">
+		    <result name="success" type="redirect">riskgroup.jsp</result>
+		</action>
+		
+		<action name="statisticimport" class="riskManager.action.RiskstatisticAction" method="importrisk">
+		    <result name="success" type="redirect">riskimport.jsp</result>
+		</action>
+		
+		<action name="showprojectrisk" class="riskManager.action.ProjectAction" method="show">
+			<result name="success" type="redirect">riskmanage.jsp</result>
+		</action>
+	
 	</package>
 
 </struts>

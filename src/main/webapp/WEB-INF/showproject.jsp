@@ -9,18 +9,6 @@
 <script language="javascript" type="text/javascript" src="./js/jquery-1.9.0.min.js"></script>
 <title>RiskManagement</title>
 <style type="text/css">
-	#button {
-		width:100px;
-		font-size:1em;
-		padding:10px 25px;
-		font-family: 'ambleregular';
-		background:#FC7D01;
-		text-transform:uppercase;
-		color: #FFF;
-		border:none;
-		text-decoration: none;
-		outline: 0;
-	}
 	h1{
 		font-size: 25px;
 		padding: 20px 0px 10px 40px;
@@ -35,6 +23,16 @@
 	.display{
 	    widows: inherit;
 	    height: inherit;
+	}
+	#devels {
+		float:left;
+		margin-top:-20px;
+		margin-left:140px;
+	}
+	#devels2 {
+		float:left;
+		margin-top:-20px;
+		margin-left:40px;
 	}
 </style>
 </head>
@@ -51,10 +49,9 @@
 						<% String pname = (String)request.getServletContext().getAttribute("pname"); 
 							String rname = (String)request.getServletContext().getAttribute("rname");
 						%>
-						<li><a href="/RiskManagement/showproject"><%=pname %></a></li>	
-						<li><a href="/RiskManagement/showproject">项目成员</a></li>	
-						<li><a href="/RiskManagement/showprojectrisk">风险列表</a></li>	
-						
+						<li><a href="showproject.jsp"><%=pname %></a></li>	
+						<li><a href="showproject.jsp">项目成员</a></li>	
+						<li><a href="riskmanage.jsp">风险管理计划</a></li>	
 					</ul>
 				</div>
 					<div class="account_desc">
@@ -77,39 +74,92 @@
 <!-- title -->
 <h1><%= (String)request.getServletContext().getAttribute("pname")%></h1>
 <!-- title -->
-<!-- risklist -->
-<div id="riskList">
-	<div id="button">
-		<a href="/RiskManagement/addrisk.jsp" style="color: #000">添加风险</a>
-	</div>
+<!-- member -->
+<div id="member" >
+<div>
+	<input type="button" onclick="newdeveloper()" value="添加人员">
+	<form action="/RiskManagement/addmember">
 	
-	<div id="search" style="margin-left:400px;margin-top:-30px;float:left;">
-	<form action="searchrisk">
-		类型：<select name="searchtype">
-		<%          
-		//0：人员变动；1：缺乏共识；2：资金不足；3：设备故障；4：设计欠缺；5：计划过于乐观；6：其他
- 		%>
- 			<option value="-1">--</option>
-			<option value="0">人员变动</option>
-			<option value="1">缺乏共识</option>
-			<option value="2">资金不足</option>
-			<option value="3">设备故障</option>
-			<option value="4">设计欠缺</option>
-			<option value="5">计划过于乐观</option>
-			<option value="6">其他</option>
-		</select>
-		状态：<select name="searchstate">
-			<option value="-1">--</option>
-			<option value="0">未发生</option>
-			<option value="1">已发生</option>
-			<option value="2">已解决</option>
-
-		</select>
-		<input type="submit" value="确定"> 
+	<script>
+	function newdeveloper(){
+		
+		target=document.getElementById("devels");
+		target.style.display="block";
+		target2=document.getElementById("devels2");
+		target2.style.display="block";
+	}
+	</script>
+		<div id="devels" class="hidden">
+		<%
+		String[] developers = (String[])request.getServletContext().getAttribute("developers");
+		String[] developer_names = (String[])request.getServletContext().getAttribute("developer_names");
+		if(developers!=null){
+			//System.out.println(Integer.toString(developer_names.length));
+		%>
+		开发者：<select name="memberid">
+			<%
+			for(int i=0;i<developers.length;i++){
+	   		%>
+	    	<option value="<%=developers[i] %>"><%=developer_names[i] %></option>
+	    	<%
+	    	}
+	    	%>
+	        </select>
+	    <%
+		}
+		%>
+		</div>
+		<div id="devels2" class="hidden">
+		<input type="submit" value="确定">
+		</div>
 	</form>
+</div>
+
+<div class="component" style="margin-top:-20px;">
+	<table>
+		<thead>
+				<tr>
+                    <th>id</th>
+					<th>名字</th>
+					<th>角色</th>
+				</tr>
+			</thead>
+			<% 
+				String[] mids = (String[])request.getServletContext().getAttribute("mids");
+				String[] mnames=(String[])request.getServletContext().getAttribute("mnames");
+				String[] mroles=(String[])request.getServletContext().getAttribute("mroles");
+				%>
+				<tbody>
+				<% 
+				if (mids.length > 0) {
+					for (int i=0;i < mids.length;i++) {
+							
+			%>		
+				<tr>
+                    <td><%=mids[i] %></td>
+                    <td><%=mnames[i] %></td>
+                    <td><%=mroles[i] %></td>
+                </tr>
+						
+			<%
+					}
+				} 
+			%>
+			<tbody>
+		</table>
 	</div>
+</div>
+
+<!-- member -->
+<!-- risklist -->
+<div id="riskList" class="hidden">
+	<div class="mybutton">
+		<a href="/RiskManagement/addrisk.jsp" style="color: #000">添加风险</a>
+		
+	</div>
+	<a href="/RiskManagement/addrisk.jsp" style="color: #000">导入</a>
 	<br>
-	<div class="component" style="margin-top:-40px;">
+	<div class="component">
 	<table>
 		<thead>
 				<tr>
@@ -133,7 +183,7 @@
 						String rid=rids[i];
 						String name=names[i];
 							//String rid=Integer.toString(risklist.get(i).getRid());
-			%>		
+				%>		
 				<tr>
                     <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>"><%=names[i] %></a></td>
                     <td><%=affects[i] %></td>
@@ -146,10 +196,10 @@
                     <%} %>
                 </tr>
 						
-			<%
+				<%
 					}
 				} 
-			%>
+				%>
 			</tbody>
 		</table>
 	</div>

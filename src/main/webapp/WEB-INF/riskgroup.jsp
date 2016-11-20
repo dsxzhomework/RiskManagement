@@ -24,14 +24,8 @@
 	#choose {
 		margin-left:620px;
 	}
-		.hidden{
-    	display: none;
-	}
-	.display{
-	    widows: inherit;
-	    height: inherit;
-	}
-	</style>  
+	</style>
+	<script src="Chart.js"></script>
 </head>
 <body>
 
@@ -58,16 +52,17 @@
 	  	</div>
 </div>
 <div id="subtop">
-	<form method="post" action="statistic">
+	<form method="post" action="">
+		<script type="text/javascript" src="js/date.js"></script>
         <div style="float:left;">
              <span style="float:left;">开始日期：</span>   
              <input type="text" class="text" name="searchtimestart" placeholder="yyyy-mm-dd" onfocus="this.value = '';"  >     
-             <!-- <input name="searchtimestart" type="text" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''"> -->
+             <input name="searchtimestart" type="text" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''">
 			 
 		</div>
         <div style="float:left;margin-left:40px;">
              <span style="float:left;">结束日期：</span>        
-          	 <input type="text" class="text" name="searchtimeend" placeholder="yyyy-mm-dd" onfocus="this.value = '';"  >  
+             <input name="searchtimeend" type="text" value="" onClick="showcalendar(event,this);" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''">
 			 
 		</div>
 		<div style="float:left;margin-left:40px;">
@@ -79,78 +74,38 @@
 		<div class="submit" style="float:left;margin-left:20px;">
 			<input type="submit" value="确认" onClick="choose()">
 		</div>
-		<!--<input type="submit" value="确认">  -->
 	</form>
+
 </div>
-<div>
+<div id="diagram">
 	<div style="margin-left:100px;margin-top:40px">
-        <canvas id="a_canvas" width="700" height="400"></canvas> 
-        
-<script>    
-    	(function(){    
-    	
-        window.addEventListener("load", function(){    
+        <canvas id="a_canvas" width="700" height="400"></canvas>    
+		<script>    
+    	function choose(){    
+     
+        //window.addEventListener("load", function(){    
      	//get data here
      	<%
-     		List<Statistic> dataget = (List<Statistic>)request.getServletContext().getAttribute("statisticresult");
+     		List<Statistic> data = (List<Statistic>)request.getServletContext().getAttribute("statisticresult");
      		int[] ydata = new int[7];
      		String[] xdata = new String[7];
-     		System.out.print(dataget.size());
-     		if(dataget.size()>0){
-     			for (int i=0;i < dataget.size();i++) {
-         			ydata[i] = dataget.get(i).getCountresult();
-         			switch(dataget.get(i).getType()){
-         			case 0:xdata[i]="人员变动";break;
-         			case 1:xdata[i]="缺乏共识";break;
-         			case 2:xdata[i]="资金不足";break;
-         			case 3:xdata[i]="设备故障";break;
-         			case 4:xdata[i]="设计欠缺";break;
-         			case 5:xdata[i]="计划过于乐观";break;
-         			case 6:xdata[i]="其他";
-         			}
-         		}
-     		} else {
-     			ydata[0]=0;
-     			ydata[1]=0;
-     			ydata[2]=0;
-     			ydata[3]=0;
-     			ydata[4]=0;
-     			ydata[5]=0;
-     			ydata[6]=0;
-     			xdata[0]="人员变动";
-     			xdata[1]="缺乏共识";
-     			xdata[2]="资金不足";
-     			xdata[3]="设备故障";
-     			xdata[4]="设计欠缺";
-     			xdata[5]="计划过于乐观";
-     			xdata[6]="其他";
+     		for (int i=0;i < data.size();i++) {
+     			ydata[i] = data.get(i).getCountresult();
+     			switch(data.get(i).getType()){
+     			case 0:xdata[i]="人员变动";
+     			case 1:xdata[i]="缺乏共识";
+     			case 2:xdata[i]="资金不足";
+     			case 3:xdata[i]="设备故障";
+     			case 4:xdata[i]="设计欠缺";
+     			case 5:xdata[i]="计划过于乐观";
+     			case 6:xdata[i]="其他";
+     			}
      		}
-     		
      	%>
-          //var data = ydata; 
-          var data = new Array();
-          <%
-          for (int i=0; i<ydata.length; i++)
-          {
-      	%>
-      		data[<%=i%>] = '<%=ydata[i]%>';
-     	 <%
-          	}
-      	%>
-          var xinforma=new Array();
-          <%
-          for (int i=0; i<xdata.length; i++)
-          {
-      	%>
-      		xinforma[<%=i%>] = '<%=xdata[i]%>';
-     	 <%
-          	}
-      	%>
-          //var xinforma = xdata;    
+          var data = ydata;    
+          var xinforma = xdata;    
           //0：人员变动；1：缺乏共识；2：资金不足；3：设备故障；4：设计欠缺；5：计划过于乐观；6：其他
-			 //var data = [0,1200,2000,1200,1000,800,1300];    
-         
-			// var xinforma = ["w","s","o","q","d"];
+
           // 获取上下文    
           var a_canvas = document.getElementById('a_canvas');    
           var context = a_canvas.getContext("2d");    
@@ -234,10 +189,10 @@
              context.fillText('风险类型',realwidth,realheight+12);    
              context.fillText('数量',0,10);    
              }    
-        },false);    
-      })()
+        //},false);    
+      };    
            
-	</script>   
+	</script>
 	</div>
 </div>
 </body>

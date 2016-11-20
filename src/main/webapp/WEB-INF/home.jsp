@@ -16,28 +16,23 @@
 </head>
 
 <body>
-<%
-	if(request.getServletContext().getAttribute("uid")==null){
-		response.sendRedirect("login.jsp?error=2"); 
-	}
-%>
 <div class="header">
     <div class="headertop_desc">
 	    <div class="wrap">
 			<div class="nav_list">
 				<ul>
 					<li><a href="home.jsp">主页</a></li>
-					<li><a href="#">项目列表</a></li>	
 					<li><a href="/RiskManagement/showrplist">RA列表</a></li>	
 					<li><a href="riskgroup.jsp">组织风险库</a></li>	
 				</ul>
 			</div>
 			<div class="account_desc">
 				<ul>
-				
 					<%
-					
 					String uname = (String)request.getServletContext().getAttribute("uname");
+					if(request.getServletContext().getAttribute("uid")==null){
+            	    	response.sendRedirect("login.jsp"); 
+            	    }
 					%>
 					<li><a href="#" target="_blank"><%=uname %></a></li>
 					<li><a href="/RiskManagement/loginout" target="_blank">登出</a></li>
@@ -50,23 +45,10 @@
 
 <div class="main">
 
-<div class="left">
-		 <%
-		String role = (String)request.getServletContext().getAttribute("role"); 
-		if (role.equals("manager")) {
-	    %>
-	    <!-- button new project begin-->
-	    <div class="mybutton">
-				<a href="newproject.jsp" style="color: #000">创建项目</a>	
-			</div>
-	    <!-- button new project end -->
-	    <%
-	    } 
-	    %>
 
-</div>
 
 <div class="left"> 
+    <h1>项目列表</h1>
         <ul id = "prolist" style="font-size:20px">
 		    <% 
 			String[] pids =(String[]) request.getServletContext().getAttribute("pids");
@@ -87,7 +69,19 @@
 	    </ul>
 	   </div>
 
+<div class="left">
+		 <%
+		String role = (String)request.getServletContext().getAttribute("role"); 
+		if (role.equals("manager")) {
+	    %>
+	    <!-- button new project begin-->
+	    <input type="submit" value="创建项目" onclick="location.href='newproject.jsp'">
+	    <!-- button new project end -->
+	    <%
+	    } 
+	    %>
 
+</div>
 </div>
 </body>
 </html>

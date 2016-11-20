@@ -25,6 +25,10 @@
 	.hidden {
 		display:none;
 	}
+	.display{
+	    widows: inherit;
+	    height: inherit;
+	}
 	</style>
 </head>
 <body>
@@ -33,7 +37,12 @@
 			<div class="wrap">
 				<div class="nav_list">
 					<ul>
-						<li><a href="home.jsp">主页</a></li>
+					<%String rpname = (String)request.getServletContext().getAttribute("rpname"); 
+					int rpid = (int)request.getServletContext().getAttribute("rpid"); 
+					%> 
+						<li><a href="/RiskManagement/login">主页</a></li>
+						<li><a href="/RiskManagement/showrplist">RA列表</a></li>	
+						<li><a href="/RiskManagement/showrp?rpid=<%=rpid%>"><%=rpname %></a></li>	
 					</ul>
 				</div>
 					<div class="account_desc">
@@ -51,18 +60,22 @@
 	  	
 	</div>
 
-<div id="subtop">
-	<form method="post" action="">
-		<script type="text/javascript" src="js/date.js"></script>
+<div id="subtop" style="margin:5px;">
+	<form method="post" action="importrisk">
+		<script type="text/javascript" ></script>
         <div style="float:left;">
              <span style="float:left;">开始日期：</span>        
-             <input name="datebegin" type="text" value="" onClick="showcalendar(event,this);" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''">
-			 
+			 <input type="text" class="text" name="datebegin" placeholder="YYYY-MM-dd" onfocus="this.value = '';"  >
 		</div>
         <div style="float:left;margin-left:40px;">
              <span style="float:left;">结束日期：</span>        
-             <input name="dateend" type="text" value="" onClick="showcalendar(event,this);" onFocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''">
-			 
+			 <input type="text" class="text" name="dateend" placeholder="YYYY-MM-dd" onfocus="this.value = '';"  >
+		</div>
+		<div style="float:left;margin-left:40px;">
+			类型：<select name="importtype">
+				<option value="quesmost">问题最多</option>
+				<option value="idenmost">识别最多</option>
+			</select>
 		</div>
 		<div class="submit" style="float:left;margin-left:40px;">
 			<input type="submit" value="确认" onClick="choose()">
@@ -72,39 +85,32 @@
 		<input type="submit" value="导入" onClick="importRid()">
 	</div>
 </div>
-<div id="import_risklist" class="hidden">
+<div id="import_risklist"  style="margin:10px;">
 	<div class="component">
+
 	<script type="text/javascript">
+	
 	function choose(){
 		document.getElementById('import_risklist').className="display";
 		
 	}
 	function importRid(){
 		var inputs = document.getElementById("rrisk").getElementsByTagName("input");
-		var cc=0;
-		for(var i=0;i<inputs.length;i++){
-			if(inputs[i].type=="checkbox"){
-				cc = cc + 1;
-			}
-		}
-	
+		
+		var riskids = [""];
+		var countline = 0;
 		for(var i=0;i < inputs.length;i++){
 			if(inputs[i].type=="checkbox") {
 				if(inputs[i].checked){
-					var checkedRow=inputs[i];
-					var tr = checkedRow.parentNode.parentNode;
-	         		var tds = tr.cells;
 	         		//loop column
-	         		
-	         		for(var j = 1;j < tds.length;j++){		 
-						var str="";             
-          				str += "title:"+tds[j].title+ "~ value:"+tds[j].value+"~innerHTML:"+tds[j].innerHTML ;
-          				                		             
-       				}
+
+	         		riskids[countline] = i;
+	         		countline++;
 				}
 			}
-			
+
 		}
+		 window.location.href = "/RiskManagement/import?index="+riskids;
 	}
 	</script>
 	<table id="rrisk">
@@ -117,14 +123,22 @@
 					<th>查看</th>
 				</tr>
 			</thead>
-			<% 
-				String[] rids = (String[])request.getServletContext().getAttribute("rids");
-				String[] names=(String[])request.getServletContext().getAttribute("rnames");
-				String[] affects=(String[])request.getServletContext().getAttribute("affects");
-				String[] states=(String[])request.getServletContext().getAttribute("states");
+				<% 
+					String[] rids = (String[])request.getServletContext().getAttribute("rids");
+					String[] names=(String[])request.getServletContext().getAttribute("rnames");
+					String[] affects=(String[])request.getServletContext().getAttribute("affects");
+					String[] states=(String[])request.getServletContext().getAttribute("states");
 				%>
-				<tbody>
-<% 
+				<tbody>		
+				<tr>
+					<td><input type="checkbox"></td> 
+                    <td>ggg</a></td>
+                    <td>dd</td>
+                    <td>ddd</td>
+                    <td>>查看</a></td>
+                </tr>		
+				
+			<% 
 				if (rids.length > 0) {
 					for (int i=0;i < rids.length;i++) {
 						String rid=rids[i];

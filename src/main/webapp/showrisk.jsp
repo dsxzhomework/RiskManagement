@@ -18,8 +18,8 @@
 						<% String pname = (String)request.getServletContext().getAttribute("pname"); 
 						String rname = (String)request.getServletContext().getAttribute("rname");
 						%>
-						<li><a href="showproject.jsp"><%=pname %></a></li>	
-						<li><a href="showrisk.jsp"><%=rname %></a></li>	
+						<li><a href="/RiskManagement/showprojectrisk"><%=pname %></a></li>	
+						<li><a href="/RiskManagement/showrisk"><%=rname %></a></li>	
 					</ul>
 				</div>
 					<div class="account_desc">
@@ -52,6 +52,8 @@
         		int tracker = (int)request.getServletContext().getAttribute("tracker");//uid
         		String tracker_name = (String)request.getServletContext().getAttribute("tracker_name");
         		String provider_name = (String)request.getServletContext().getAttribute("provider_name");
+        		String buildtime = (String)request.getServletContext().getAttribute("buildtime");
+        		String changetime = (String)request.getServletContext().getAttribute("changetime");
         %>
         <form action="/RiskManagement/updateRisk" method="post">
         	<div>
@@ -129,6 +131,14 @@
 	    	%>
 	        </select>
 	        </div>
+	         <div style="clear:both;">
+            <span>创建时间 </span> <span><%=buildtime %></span>
+            </div>
+            <% if(changetime!=null){%>
+             <div style="clear:both;">
+            <span>修改时间 </span> <span><%=changetime %></span>
+            </div>
+            <%}%>
 	        <input type="submit" value="保存"  class="button" style="clear:both;margin-left:80px;margin-top:30px;">
         </form>
         <%} %>

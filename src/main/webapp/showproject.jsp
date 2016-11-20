@@ -24,6 +24,16 @@
 	    widows: inherit;
 	    height: inherit;
 	}
+	#devels {
+		float:left;
+		margin-top:-20px;
+		margin-left:140px;
+	}
+	#devels2 {
+		float:left;
+		margin-top:-20px;
+		margin-left:40px;
+	}
 </style>
 </head>
 <body>
@@ -39,9 +49,9 @@
 						<% String pname = (String)request.getServletContext().getAttribute("pname"); 
 							String rname = (String)request.getServletContext().getAttribute("rname");
 						%>
-						<li><a href="showproject.jsp"><%=pname %></a></li>	
-						<li><a href="showproject.jsp">项目成员</a></li>	
-						<li><a href="riskmanage.jsp">风险管理计划</a></li>	
+						<li><a href="/RiskManagement/showproject"><%=pname %></a></li>	
+						<li><a href="/RiskManagement/showproject">项目成员</a></li>	
+						<li><a href="/RiskManagement/showprojectrisk">风险列表</a></li>	
 					</ul>
 				</div>
 					<div class="account_desc">
@@ -66,7 +76,51 @@
 <!-- title -->
 <!-- member -->
 <div id="member" >
-<div class="component">
+<div>
+ <%
+		String role = (String)request.getServletContext().getAttribute("role"); 
+		if (role.equals("manager")) {
+	    %>
+	<input type="button" onclick="newdeveloper()" value="添加人员">
+	<%} %>
+	<form action="/RiskManagement/addmember">
+	
+	<script>
+	function newdeveloper(){
+		
+		target=document.getElementById("devels");
+		target.style.display="block";
+		target2=document.getElementById("devels2");
+		target2.style.display="block";
+	}
+	</script>
+		<div id="devels" class="hidden">
+		<%
+		String[] developers = (String[])request.getServletContext().getAttribute("developers");
+		String[] developer_names = (String[])request.getServletContext().getAttribute("developer_names");
+		if(developers!=null){
+			//System.out.println(Integer.toString(developer_names.length));
+		%>
+		开发者：<select name="memberid">
+			<%
+			for(int i=0;i<developers.length;i++){
+	   		%>
+	    	<option value="<%=developers[i] %>"><%=developer_names[i] %></option>
+	    	<%
+	    	}
+	    	%>
+	        </select>
+	    <%
+		}
+		%>
+		</div>
+		<div id="devels2" class="hidden">
+		<input type="submit" value="确定">
+		</div>
+	</form>
+</div>
+
+<div class="component" style="margin-top:-20px;">
 	<table>
 		<thead>
 				<tr>
@@ -134,7 +188,7 @@
 						String rid=rids[i];
 						String name=names[i];
 							//String rid=Integer.toString(risklist.get(i).getRid());
-			%>		
+				%>		
 				<tr>
                     <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>"><%=names[i] %></a></td>
                     <td><%=affects[i] %></td>
@@ -147,10 +201,10 @@
                     <%} %>
                 </tr>
 						
-			<%
+				<%
 					}
 				} 
-			%>
+				%>
 			</tbody>
 		</table>
 	</div>

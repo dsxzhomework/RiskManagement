@@ -21,7 +21,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/db?characterEncoding=utf-8" />
+			value="jdbc:mysql://122.112.210.191:3306/db?characterEncoding=utf-8" />
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
@@ -102,6 +102,10 @@
 		<property name="riskService" ref="riskService" ></property>
 	</bean>	
 	
+	<bean id="riskstatisticAction" class="riskManager.action.RiskstatisticAction">
+	    <property name="riskService" ref="riskService"></property>
+	</bean>
+	
 	<bean id="rpidridDao" class="riskManager.dao.impl.RpidRidDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" ></property>
 	</bean>
@@ -118,8 +122,7 @@
 	
 	<bean id="riskplanAction" class="riskManager.action.RiskPlanAction">
 		<property name="rpservice" ref="riskplanService" ></property>
-	</bean>	
-	
+	</bean>
 	
 	<!-- 定义 Autowired 自动注入 bean -->
 	<bean

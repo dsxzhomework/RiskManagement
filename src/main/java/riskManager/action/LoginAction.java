@@ -92,7 +92,7 @@ public class LoginAction extends BaseAction{
 		
 		String[] developers = (String[])sc.getAttribute("developers");
 		String[] developer_names = (String[])sc.getAttribute("developers_names");
-		if(developers==null){
+		
 			List<User> ul = userService.findByRole("developer");
 			//System.out.println("desuccess");
 			if(ul.size()>0){
@@ -107,7 +107,7 @@ public class LoginAction extends BaseAction{
 				sc.setAttribute("developers", developers);
 				sc.setAttribute("developer_names", developer_names);
 			}
-		}
+		
 		return success;
 	}
 }

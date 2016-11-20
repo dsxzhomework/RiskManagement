@@ -7,6 +7,9 @@
 <link href="./css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <link href="./css/component.css" rel="stylesheet" type="text/css" media="all"/>
 <script language="javascript" type="text/javascript" src="./js/jquery-1.9.0.min.js"></script>
+<style type="text/css">
+    tr.hide,tr.hide td{display:none;}
+</style>
 <title>RiskManagement</title>
 <style type="text/css">
 	h1{
@@ -28,9 +31,11 @@
 				<div class="nav_list">
 					<ul>
 						<li><a href="home.jsp">主页</a></li>
-						<% String rpname = (String)request.getServletContext().getAttribute("rpname"); 
+						<% String rpname = (String)request.getServletContext().getAttribute("rpname");
+						int rpid = (int)request.getServletContext().getAttribute("rpid"); 
 						%>
 						<li><a href="/RiskManagement/showrplist">RA列表</a></li>	
+						<li><a href="/RiskManagement/showrp?rpid=<%=rpid%>"><%=rpname %></a></li>	
 					</ul>
 				</div>
 					<div class="account_desc">
@@ -55,10 +60,72 @@
 <!-- title -->
 <!-- risklist -->
 <div id="riskList">
-	<div class="mybutton">
-		<a href="/RiskManagement/addrisk.jsp" style="color: #000">导入</a>
+	<div class="mybutton" >
+		<a href="riskimport.jsp" style="color: #000">导入</a>
 	</div>
-
+	<div style="float:right;">      
+    	<br>        
+        <label>类型</label>
+           <select class ="selectStyle" id="type">
+            	<option value="">--</option>
+            	<option value="人员变动">人员变动</option>
+            	<option value="缺乏共识">缺乏共识</option>
+                <option value="资金不足">资金不足</option>
+                <option value="设备故障">设备故障</option>
+                <option value="设计欠缺">设计欠缺</option>
+                <option value="计划过于乐观">计划过于乐观</option>
+                <option value="其他">其他</option>
+            </select>
+        <label>危险程度</label>
+             <select class ="selectStyle" id="affect">
+                <option value="">--</option>
+                <option value="0">低</option>
+                <option value="1">中</option>
+                <option value="2">高</option>
+            </select>  
+        <label>状态</label>
+           <select class ="selectStyle" id="state">
+                <option value="">--</option>
+                <option value="未发生">未发生</option>
+                <option value="已发生">已发生</option>
+                <option value="已解决">已解决</option>
+            </select>  
+        <input type="submit" id="search" value="搜索" onclick="search()"  />
+    </div>
+    <script type="text/javascript">
+                function filter(fn) {
+                    var list = document.getElementsByTagName('table')[0].getElementsByTagName('tbody')[0].rows;
+                    var size = list.length;
+                    var tr;
+                    for(var i = 0; i < size; i++) {
+                        tr = list[i];
+                        tr.removeAttribute('class', 'hide')
+                        if(!fn(tr)) {
+                            tr.setAttribute('class', 'hide');
+                        }
+                    }
+                }
+                function value(id) {
+                    return document.getElementById(id).value;
+                }
+                function search() {
+                    var type = document.getElementById('type').value;
+                    var affect = document.getElementById('affect').value;
+                    var state = document.getElementById('state').value;
+                    filter(function(tr) {		
+                        if(type && tr.cells[0].innerHTML.indexOf(type) < 0) {
+                            return false;
+                        }
+                        if(affect && tr.cells[1].innerHTML.indexOf(affect) < 0) {
+                            return false;
+                        }
+                        if(state && tr.cells[2].innerHTML.indexOf(state) < 0) {
+                            return false;
+                        }
+                        return true;
+                    });
+                } 
+        </script>
 	<br>
 	<div class="component">
 	<table>

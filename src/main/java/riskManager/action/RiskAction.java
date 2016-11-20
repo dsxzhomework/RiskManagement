@@ -75,6 +75,7 @@ public class RiskAction extends BaseAction{
 		if(state==2){
 			return fail;
 		}
+		risk.setChangetime(new Date());
 		risk.setState(++state);
 		risk = riskService.update(risk);
 		sc.setAttribute("state", risk.getState());
@@ -125,7 +126,11 @@ public class RiskAction extends BaseAction{
 		sc.setAttribute("tracker", risk.getTracker());
 		sc.setAttribute("tracker_name", tracker_name);//add
 		sc.setAttribute("buildtime",buildtime);
-		
+		if(risk.getChangetime()!=null)
+			sc.setAttribute("changetime", formatter.format(risk.getChangetime()));
+		else{
+			sc.setAttribute("changetime", null);
+		}
 		return success;	
 	}
 	
