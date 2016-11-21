@@ -10,7 +10,7 @@
 <div><p><%= (String)request.getServletContext().getAttribute("pname")%></p></div>
 <div>
 <ul id = "risklist">
-	<a href="/RiskManagement/addrisk.jsp">添加风险</a>
+	<a href="addrisk.jsp">添加风险</a>
 					<% 
 					String[] rids = (String[])request.getServletContext().getAttribute("rids");
 					String[] names=(String[])request.getServletContext().getAttribute("rnames");
@@ -21,7 +21,7 @@
 							//String rid=Integer.toString(risklist.get(i).getRid());
 					%>
 						
-							<li><a href="/RiskManagement/showRisk?rid=<%=rid %>"><%=name %></a></li>
+							<li><a href="showRisk?rid=<%=rid %>"><%=name %></a></li>
 						
 					<%
 						}

@@ -51,9 +51,9 @@
 						<% String pname = (String)request.getServletContext().getAttribute("pname"); 
 							String rname = (String)request.getServletContext().getAttribute("rname");
 						%>
-						<li><a href="/RiskManagement/showproject"><%=pname %></a></li>	
-						<li><a href="/RiskManagement/showproject">项目成员</a></li>	
-						<li><a href="/RiskManagement/showprojectrisk">风险列表</a></li>	
+						<li><a href="showproject"><%=pname %></a></li>	
+						<li><a href="showproject">项目成员</a></li>	
+						<li><a href="showprojectrisk">风险列表</a></li>	
 						
 					</ul>
 				</div>
@@ -63,7 +63,7 @@
 						    String uname = (String)request.getServletContext().getAttribute("uname");
 						%>
 							<li><a href="home.jsp" target="_blank"><%=uname %></a></li>
-							<li><a href="/RiskManagement/loginout" target="_blank">登出</a></li>
+							<li><a href="loginout" target="_blank">登出</a></li>
 						</ul>
 					</div>
 				<div class="clear"></div>
@@ -80,7 +80,7 @@
 <!-- risklist -->
 <div id="riskList">
 	<div id="button">
-		<a href="/RiskManagement/addrisk.jsp" style="color: #000">添加风险</a>
+		<a href="addrisk.jsp" style="color: #000">添加风险</a>
 	</div>
 	
 	<div id="search" style="margin-left:400px;margin-top:-30px;float:left;">
@@ -135,12 +135,12 @@
 							//String rid=Integer.toString(risklist.get(i).getRid());
 			%>		
 				<tr>
-                    <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>"><%=names[i] %></a></td>
+                    <td><a href="showRisk?rid=<%=rids[i]%>"><%=names[i] %></a></td>
                     <td><%=affects[i] %></td>
                     <td><%=states[i] %></td>
-                    <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>">查看</a></td>
+                    <td><a href="showRisk?rid=<%=rids[i]%>">查看</a></td>
                     <%if(states[i].equals("未发生")){ %>
-                   	<td><a href="/RiskManagement/deleteRisk?rid=<%=rids[i]%>">删除</a></td>
+                   	<td><a href="deleteRisk?rid=<%=rids[i]%>">删除</a></td>
                     <%}else{ %>
  					<td style="color: grey;">删除</td> 
                     <%} %>

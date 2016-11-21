@@ -40,9 +40,9 @@
 					<%String rpname = (String)request.getServletContext().getAttribute("rpname"); 
 					int rpid = (int)request.getServletContext().getAttribute("rpid"); 
 					%> 
-						<li><a href="/RiskManagement/login">主页</a></li>
-						<li><a href="/RiskManagement/showrplist">RA列表</a></li>	
-						<li><a href="/RiskManagement/showrp?rpid=<%=rpid%>"><%=rpname %></a></li>	
+						<li><a href="login">主页</a></li>
+						<li><a href="showrplist">RA列表</a></li>	
+						<li><a href="showrp?rpid=<%=rpid%>"><%=rpname %></a></li>	
 					</ul>
 				</div>
 					<div class="account_desc">
@@ -51,7 +51,7 @@
 						    String uname = (String)request.getServletContext().getAttribute("uname");
 						%>
 							<li><a href="home.jsp" target="_blank"><%=uname %></a></li>
-							<li><a href="/RiskManagement/loginout" target="_blank">登出</a></li>
+							<li><a href="loginout" target="_blank">登出</a></li>
 						</ul>
 					</div>
 				<div class="clear"></div>
@@ -110,7 +110,7 @@
 			}
 
 		}
-		 window.location.href = "/RiskManagement/import?index="+riskids;
+		 window.location.href = "import?index="+riskids;
 	}
 	</script>
 	<table id="rrisk">
@@ -147,10 +147,10 @@
 			%>		
 				<tr>
 					<td><input type="checkbox"></td> 
-                    <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>"><%=names[i] %></a></td>
+                    <td><a href="showRisk?rid=<%=rids[i]%>"><%=names[i] %></a></td>
                     <td><%=affects[i] %></td>
                     <td><%=states[i] %></td>
-                    <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>">查看</a></td>
+                    <td><a href="showRisk?rid=<%=rids[i]%>">查看</a></td>
                 </tr>
 						
 			<%

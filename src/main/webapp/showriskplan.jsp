@@ -34,8 +34,8 @@
 						<% String rpname = (String)request.getServletContext().getAttribute("rpname");
 						int rpid = (int)request.getServletContext().getAttribute("rpid"); 
 						%>
-						<li><a href="/RiskManagement/showrplist">RA列表</a></li>	
-						<li><a href="/RiskManagement/showrp?rpid=<%=rpid%>"><%=rpname %></a></li>	
+						<li><a href="showrplist">RA列表</a></li>	
+						<li><a href="showrp?rpid=<%=rpid%>"><%=rpname %></a></li>	
 					</ul>
 				</div>
 					<div class="account_desc">
@@ -44,7 +44,7 @@
 						    String uname = (String)request.getServletContext().getAttribute("uname");
 						%>
 							<li><a href="home.jsp" target="_blank"><%=uname %></a></li>
-							<li><a href="/RiskManagement/loginout" target="_blank">登出</a></li>
+							<li><a href="loginout" target="_blank">登出</a></li>
 						</ul>
 					</div>
 				<div class="clear"></div>
@@ -153,11 +153,11 @@
 							//String rid=Integer.toString(risklist.get(i).getRid());
 			%>		
 				<tr>
-                    <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>"><%=names[i] %></a></td>
+                    <td><a href="showRisk?rid=<%=rids[i]%>"><%=names[i] %></a></td>
                     <td><%=affects[i] %></td>
                     <td><%=states[i] %></td>
-                    <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>">查看</a></td>
-                   	<td><a href="/RiskManagement/deleterr?rid=<%=rids[i]%>">删除</a></td>            
+                    <td><a href="showRisk?rid=<%=rids[i]%>">查看</a></td>
+                   	<td><a href="deleterr?rid=<%=rids[i]%>">删除</a></td>            
                 </tr>
 						
 			<%

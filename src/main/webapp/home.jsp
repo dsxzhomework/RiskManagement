@@ -28,7 +28,7 @@
 				<ul>
 					<li><a href="home.jsp">主页</a></li>
 					<li><a href="#">项目列表</a></li>	
-					<li><a href="/RiskManagement/showrplist">RA列表</a></li>	
+					<li><a href="showrplist">RA列表</a></li>	
 					<li><a href="riskgroup.jsp">组织风险库</a></li>	
 				</ul>
 			</div>
@@ -78,7 +78,7 @@
 					String pid=pids[i];
 		    %>
 						
-		            <li><a href="/RiskManagement/showproject.action?pid=<%=pid %>"><%=name %></a></li>
+		            <li><a href="showproject.action?pid=<%=pid %>"><%=name %></a></li>
 						
 		    <%
 				}

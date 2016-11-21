@@ -22,7 +22,7 @@
 			<div class="nav_list">
 				<ul>
 					<li><a href="home.jsp">主页</a></li>
-					<li><a href="/RiskManagement/showrplist">RA列表</a></li>
+					<li><a href="showrplist">RA列表</a></li>
 				</ul>
 			</div>
 			<div class="account_desc">
@@ -31,7 +31,7 @@
 					String uname = (String)request.getServletContext().getAttribute("uname");
 					%>
 					<li><a href="#" target="_blank"><%=uname %></a></li>
-					<li><a href="/RiskManagement/loginout" target="_blank">登出</a></li>
+					<li><a href="loginout" target="_blank">登出</a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -40,7 +40,7 @@
 </div>
 
 <div class="main">
-	<form action="/RiskManagement/addrp">
+	<form action="addrp">
 		计划名称：<input type="text" class="text" name="rpname" placeholder="风险管理计划" onfocus="this.value = '';"  >
 		<div class="submit">
 			<input type="submit" value="添加" >

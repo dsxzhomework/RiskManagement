@@ -18,8 +18,8 @@
 						<% String pname = (String)request.getServletContext().getAttribute("pname"); 
 						String rname = (String)request.getServletContext().getAttribute("rname");
 						%>
-						<li><a href="/RiskManagement/showprojectrisk"><%=pname %></a></li>	
-						<li><a href="/RiskManagement/showrisk"><%=rname %></a></li>	
+						<li><a href="showprojectrisk"><%=pname %></a></li>	
+						<li><a href="showrisk"><%=rname %></a></li>	
 					</ul>
 				</div>
 					<div class="account_desc">
@@ -28,7 +28,7 @@
 						    String uname = (String)request.getServletContext().getAttribute("uname");
 						%>
 							<li><a href="home.jsp" target="_blank"><%=uname %></a></li>
-							<li><a href="/RiskManagement/loginout" target="_blank">登出</a></li>
+							<li><a href="loginout" target="_blank">登出</a></li>
 						</ul>
 					</div>
 				<div class="clear"></div>
@@ -55,7 +55,7 @@
         		String buildtime = (String)request.getServletContext().getAttribute("buildtime");
         		String changetime = (String)request.getServletContext().getAttribute("changetime");
         %>
-        <form action="/RiskManagement/updateRisk" method="post">
+        <form action="updateRisk" method="post">
         	<div>
             <span>风险类型</span>
             <span style="color:black;"><%=rname %></span>

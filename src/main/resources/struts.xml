@@ -24,11 +24,11 @@
 		</action>
 		
 		<action name="addproject" class="riskManager.action.ProjectAction" method="add">
-			<result name="success" type="redirect">/RiskManagement/showproject</result>
+			<result name="success" type="redirect">showproject</result>
 		</action>
 		
 		<action name="addmember" class="riskManager.action.ProjectAction" method="addMember">
-			<result name="success" type="redirect">/RiskManagement/showproject</result>
+			<result name="success" type="redirect">showproject</result>
 		</action>
 		
 		<action name="admin" class="riskManager.action.AdminAction">
@@ -44,7 +44,7 @@
 		</action>
 		
 		<action name="addRisk" class="riskManager.action.RiskAction" method="add">
-			<result name="success" type="redirect">/RiskManagement/showRisk</result>
+			<result name="success" type="redirect">showRisk</result>
 			<result name="fail" type="redirect">addrisk.jsp?error=1</result>
 		</action>
 		
@@ -58,16 +58,16 @@
 		</action>
 		
 		<action name="updateRisk" class="riskManager.action.RiskAction" method="update">
-			<result name="success" type="redirect">/RiskManagement/showRisk</result>
+			<result name="success" type="redirect">showRisk</result>
 		</action>
 		
 		<action name="changeState" class="riskManager.action.RiskAction" method="change">
-			<result name="success" type="redirect">/RiskManagement/showRisk</result>
+			<result name="success" type="redirect">showRisk</result>
 			<result name="fail" type="redirect">show.jsp?error=1</result>
 		</action>
 
 		<action name="addrp" class="riskManager.action.RiskPlanAction" method="addRiskPlan">
-			<result name="success" type="redirect">/RiskManagement/showrplist</result>
+			<result name="success" type="redirect">showrplist</result>
 		</action>
 
 		<action name="showrplist" class="riskManager.action.RiskPlanAction" method="showRPList">
@@ -79,11 +79,11 @@
 		</action>
 
 		<action name="import" class="riskManager.action.RiskPlanAction" method="importRisk">
-			<result name="success" type="redirect">/RiskManagement/showrp</result>
+			<result name="success" type="redirect">showrp</result>
 		</action>
 
 		<action name="deleterr" class="riskManager.action.RiskPlanAction" method="deleteRisk">
-			<result name="success" type="redirect">/RiskManagement/showrp</result>
+			<result name="success" type="redirect">showrp</result>
 		</action>
 		
 		<action name="searchrisk" class="riskManager.action.RiskAction" method="findinproject">
