@@ -21,9 +21,9 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/testrm?characterEncoding=utf-8" />
+			value="jdbc:mysql://122.112.210.191:3306/db?characterEncoding=utf-8" />
 		<property name="username" value="root" />
-		<property name="password" value="1209dmx" />
+		<property name="password" value="" />
 	</bean>
 
 	<!-- 配置sessionFactory -->
