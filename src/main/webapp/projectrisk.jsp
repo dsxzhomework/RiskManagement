@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>RiskManagement</title>
 </head>
 <body>
 <div><p><%= (String)request.getServletContext().getAttribute("pname")%></p></div>

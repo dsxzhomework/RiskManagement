@@ -50,7 +50,7 @@
 						%>
 							<li><a href="home.jsp" target="_blank"><%=uname %></a></li>
 
-							<li><a href="/RiskManagement/loginout" target="_blank">登出</a></li>
+							<li><a href="loginout" target="_blank">登出</a></li>
 						</ul>
 					</div>
 				<div class="clear"></div>
