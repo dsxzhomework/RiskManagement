@@ -40,7 +40,7 @@
 					<%String rpname = (String)request.getServletContext().getAttribute("rpname"); 
 					int rpid = (int)request.getServletContext().getAttribute("rpid"); 
 					%> 
-						<li><a href="login">主页</a></li>
+						<li><a href="home.jsp">主页</a></li>
 						<li><a href="showrplist">RA列表</a></li>	
 						<li><a href="showrp?rpid=<%=rpid%>"><%=rpname %></a></li>	
 					</ul>
