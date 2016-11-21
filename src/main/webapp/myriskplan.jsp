@@ -46,7 +46,7 @@
  	%>
 		<div class="left"> 
 			<div class="mybutton">
-				<a href="addriskplan.jsp" style="color: #000">添加风险</a>	
+				<a href="addriskplan.jsp" style="color: #000">添加计划</a>	
 			</div>
 		</div>
 		<div class="left">  
