@@ -108,11 +108,11 @@
             <% 
             	if(state==0){%><span style="color:black;">未触发</span>
             	<%if(uid==tracker) {%>
-            	 <a href="/RiskManagement/changeState">已发生 </a>	
+            	 <a href="changeState">已发生 </a>	
             	 <%}}
             	else if(state==1){%><span style="color:red;">已发生</span>
             	<%if(uid==tracker) {%>
-            	<a href="/RiskManagement/changeState">已解决</a><%}}
+            	<a href="changeState">已解决</a><%}}
             	else{%><span style="color:black;">已解决</span> <%}           
             %>
             </div>
