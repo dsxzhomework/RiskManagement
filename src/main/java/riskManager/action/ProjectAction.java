@@ -71,7 +71,7 @@ public class ProjectAction extends BaseAction{
 		Project project = new Project(name,uid);
 		project = projectService.save(project);
 		System.out.println((project.getPid()));
-		sc.setAttribute("pid", project.getPid()+"");
+		sc.setAttribute("pid", project.getPid());
 		int[] member = new int[]{developer1,developer2,developer3,uid};
 		projectService.addMember(member, project.getPid());
 		return success;
