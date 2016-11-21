@@ -74,6 +74,26 @@ public class ProjectAction extends BaseAction{
 		sc.setAttribute("pid", project.getPid());
 		int[] member = new int[]{developer1,developer2,developer3,uid};
 		projectService.addMember(member, project.getPid());
+		List<Project> pl = projectService.getProjectsByUid(uid);
+		System.out.println(Integer.toString(pl.size()));
+		String[] pids = null;
+		String[] pnames = null;
+		String[] mangers = null;
+		if(pl.size()>0){
+			pids = new String[pl.size()];
+			pnames = new String[pl.size()];
+			mangers = new String[pl.size()];
+			for(int i=0;i<pl.size();i++){
+				Project p = pl.get(i);
+				pids[i] = p.getPid()+"";
+				pnames[i] = p.getName();
+				mangers[i] = p.getManager()+"";
+			}		
+		}
+	//	System.out.println(Integer.toString(pids.length));
+		sc.setAttribute("pids", pids);
+		sc.setAttribute("pnames",pnames);
+		sc.setAttribute("mangers", mangers);
 		return success;
 	}
 	
