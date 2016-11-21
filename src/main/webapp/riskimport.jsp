@@ -61,20 +61,20 @@
 	</div>
 
 <div id="subtop" style="margin:5px;">
-	<form method="post" action="importrisk">
+	<form method="post" action="statisticimport">
 		<script type="text/javascript" ></script>
         <div style="float:left;">
              <span style="float:left;">开始日期：</span>        
-			 <input type="text" class="text" name="datebegin" placeholder="YYYY-MM-dd" onfocus="this.value = '';"  >
+			 <input type="text" class="text" name="searchtimestart" placeholder="YYYY-MM-dd" onfocus="this.value = '';"  >
 		</div>
         <div style="float:left;margin-left:40px;">
              <span style="float:left;">结束日期：</span>        
-			 <input type="text" class="text" name="dateend" placeholder="YYYY-MM-dd" onfocus="this.value = '';"  >
+			 <input type="text" class="text" name="searchtimeend" placeholder="YYYY-MM-dd" onfocus="this.value = '';"  >
 		</div>
 		<div style="float:left;margin-left:40px;">
-			类型：<select name="importtype">
-				<option value="quesmost">问题最多</option>
-				<option value="idenmost">识别最多</option>
+			类型：<select name="statictype">
+				<option value="questionmost">问题最多</option>
+				<option value="identifymost">识别最多</option>
 			</select>
 		</div>
 		<div class="submit" style="float:left;margin-left:40px;">
@@ -130,14 +130,14 @@
 					String[] states=(String[])request.getServletContext().getAttribute("states");
 				%>
 				<tbody>		
-				<tr>
+<!-- 				<tr>
 					<td><input type="checkbox"></td> 
                     <td>ggg</a></td>
                     <td>dd</td>
                     <td>ddd</td>
                     <td>>查看</a></td>
                 </tr>		
-				
+				 -->
 			<% 
 				if (rids.length > 0) {
 					for (int i=0;i < rids.length;i++) {

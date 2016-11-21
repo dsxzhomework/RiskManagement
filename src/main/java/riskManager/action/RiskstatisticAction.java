@@ -157,6 +157,7 @@ public class RiskstatisticAction extends BaseAction{
 		
 		if(sorttype.equals("identifymost")){
 			listtime=riskService.statisticIdentify(timestart, timeend);
+			System.out.println("identify");
 		}
 		if(sorttype.equals("questionmost")){
 			listtime=riskService.statisticFault(timestart, timeend);
@@ -248,12 +249,12 @@ public class RiskstatisticAction extends BaseAction{
 		
 		String[] typename = {"人员变动","缺乏共识","资金不足","设备故障","设计欠缺","计划过于乐观","其他"};
 		int resultsize=result.size();
-		String[] rids=new String[size];
-		String[] rnames=new String[size];
-		String[] affects=new String[size];
-		String[] states=new String[size];
+		String[] rids=new String[resultsize];
+		String[] rnames=new String[resultsize];
+		String[] affects=new String[resultsize];
+		String[] states=new String[resultsize];
 		
-		for(int i=0;i<size;i++){
+		for(int i=0;i<resultsize;i++){
 			Risk r=result.get(i);
 			rids[i]=Integer.toString(r.getRid());
 			rnames[i]=typename[r.getType()];
